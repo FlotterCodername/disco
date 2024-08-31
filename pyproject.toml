@@ -2,7 +2,7 @@
 name = "discord-automation"
 version = "0.1.0.dev"
 description = ""
-authors = ["Fabian H. Schneider <4962476+FlotterCodername@users.noreply.github.com>"]
+authors = ["Fabian H. Schneider <discord-automation.primarily965@simplelogin.com>"]
 readme = "README.md"
 packages = [{ include = "discord_automation", from = "src" }, ]
 include = ["res/*"]
