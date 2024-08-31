@@ -1,0 +1,75 @@
+[tool.poetry]
+name = "discord-automation"
+version = "0.1.0.dev"
+description = ""
+authors = ["Fabian H. Schneider <4962476+FlotterCodername@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{ include = "discord_automation", from = "src" }, ]
+include = ["res/*"]
+
+[tool.poetry.scripts]
+disco = "discord-automation.__main__:main"
+
+[tool.poetry.dependencies]
+python = ">=3.12 <4"
+# Dependencies
+cleo = "^2.1.0"  # https://github.com/python-poetry/cleo/blob/main/CHANGELOG.md
+keyring = "^25.3.0"  # https://github.com/jaraco/keyring/blob/main/NEWS.rst
+jsonschema = "^4.23.0"  # https://github.com/python-jsonschema/jsonschema/releases
+packaging = "*"  # https://packaging.pypa.io/en/stable/changelog.html
+python-dateutil = "^2.9.0.post0"  # https://github.com/dateutil/dateutil/releases
+python-decouple = "^3.8"  # https://github.com/HBNetwork/python-decouple/blob/master/CHANGELOG.md
+xmltodict = "^0.13.0"  # https://github.com/martinblech/xmltodict/blob/master/CHANGELOG.md
+yt-dlp = "^2024.8.6"  # https://github.com/yt-dlp/yt-dlp/blob/master/Changelog.md
+
+[tool.poetry.group.dev.dependencies]
+docsig = "^0.60.1"  # https://docsig.readthedocs.io/en/latest/development/changelog.html
+mypy = "^1.10.0"  # https://github.com/python/mypy/blob/master/CHANGELOG.md
+pytest = "^8.3.2"  # https://docs.pytest.org/en/stable/changelog.html
+types-colorama = "^0.4.15.20240311"
+types-requests = "^2.32.0.20240622"
+types-jsonschema = "^4.22.0.20240610"
+
+[tool.black]
+line-length = 120
+target-version = ["py312"]
+
+[tool.isort]
+line_length = 120
+profile = "black"
+
+[tool.mypy]
+python_version = "3.12"
+ignore_errors = false
+# ignore_missing_imports = true
+
+[tool.refurb]
+enable_all = true
+python_version = "3.12"
+quiet = true
+
+[tool.ruff]
+line-length = 120
+preview = true
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "F",     # Pyflakes
+    "E",     # pycodestyle
+    "W",     # pycodestyle
+    "I",     # isort
+    "N",     # pep8-naming
+    "UP",    # pyupgrade
+    "C90",   # mccabe
+    "RET",   # flake8-return
+    "RUF",   # ruff
+    "TID",   # flake8-tidy-imports
+    "TCH",   # flake8-type-checking
+    "FURB",  # refurb
+]
+ignore = ["RET503", "RUF012"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

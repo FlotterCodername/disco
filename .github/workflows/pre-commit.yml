@@ -1,0 +1,40 @@
+name: pre-commit
+
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  group: pre-commit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # needed for auto-commit
+    steps:
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5.1.1
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies
+        run: |
+          pip3.12 install pre-commit
+
+      - uses: actions/checkout@v4.1.7
+
+      - name: Run pre-commit on modified files
+        id: pre-commit
+        run: |
+          pre-commit run --all-files || echo "status=$?" >> $GITHUB_OUTPUT
+
+      - uses: stefanzweifel/git-auto-commit-action@v5.0.1
+        with:
+          commit_message: Run pre-commit
+          branch: ${{ github.ref }}
+
+      - name: Fail if pre-commit failed
+        if: steps.pre-commit.outputs.status != '0'
+        run: exit 1
