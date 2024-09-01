@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectDictionaryState">
-    <dictionary name="fabia" />
+  <component name="Black">
+    <option name="sdkName" value="Python 3.12 (discord-automation)" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -47,4 +47,5 @@
       </profile-state>
     </entry>
   </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Poetry (discord-automation)" project-jdk-type="Python SDK" />
 </project>
