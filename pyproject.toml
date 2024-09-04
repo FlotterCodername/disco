@@ -14,6 +14,7 @@ disco = "discord-automation.__main__:main"
 python = ">=3.12 <4"
 # Dependencies
 cleo = "^2.1.0"  # https://github.com/python-poetry/cleo/blob/main/CHANGELOG.md
+discord-py = "^2.4.0"  # https://discordpy.readthedocs.io/en/stable/whats_new.html
 keyring = "^25.3.0"  # https://github.com/jaraco/keyring/blob/main/NEWS.rst
 jsonschema = "^4.23.0"  # https://github.com/python-jsonschema/jsonschema/releases
 packaging = "*"  # https://packaging.pypa.io/en/stable/changelog.html
