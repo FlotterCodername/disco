@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
-    <option name="sdkName" value="Python 3.12 (discord-automation)" />
+    <option name="enabledOnReformat" value="true" />
+    <option name="executionMode" value="BINARY" />
+    <option name="pathToExecutable" value="C:\Users\fabia\.local\bin\black.exe" />
+    <option name="sdkName" value="Poetry (discord-automation)" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
