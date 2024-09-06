@@ -6,13 +6,27 @@ If a copy of the MPL was not distributed with this file,
 You can obtain one at https://mozilla.org/MPL/2.0/.
 """
 
-import sys
+import os
+
+import discord
+
+# This example requires the 'message_content' intent.
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
 
 
-def main() -> int:
-    print("Hello World!")
-    return 0
+@client.event
+def on_ready():
+    print(f"We have logged in as {client.user}")
 
 
-if __name__ == "__main__":
-    sys.exit(main())
+@client.event
+def on_message(message: discord.Message):
+    print(message, type(message))
+    if message.author == client.user:
+        return
+
+
+client.run(os.getenv("DISCORD_TOKEN"))
