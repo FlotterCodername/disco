@@ -7,6 +7,7 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-added-large-files
+        exclude: ^/res/.*
       - id: check-ast
         language_version: python3.12
       - id: check-case-conflict
