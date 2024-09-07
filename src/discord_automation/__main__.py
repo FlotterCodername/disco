@@ -6,27 +6,22 @@ If a copy of the MPL was not distributed with this file,
 You can obtain one at https://mozilla.org/MPL/2.0/.
 """
 
-import os
-
 import discord
+import keyring
+from discord.ext import commands
 
-# This example requires the 'message_content' intent.
+# Discord bot setup
 intents = discord.Intents.default()
 intents.message_content = True
+bot = commands.Bot(command_prefix="!", intents=intents)
 
-client = discord.Client(intents=intents)
-
-
-@client.event
-def on_ready():
-    print(f"We have logged in as {client.user}")
+# This is a minimal bot that logs in and immediately logs out
 
 
-@client.event
-def on_message(message: discord.Message):
-    print(message, type(message))
-    if message.author == client.user:
-        return
+@bot.event
+async def on_ready():
+    await bot.close()
 
 
-client.run(os.getenv("DISCORD_TOKEN"))
+# to store token: keyring.set_password("org.flottercodername.disco", "@@token", "<your token>")
+bot.run(keyring.get_password("org.flottercodername.disco", "@@token"))
