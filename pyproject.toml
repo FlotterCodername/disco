@@ -1,14 +1,14 @@
 [tool.poetry]
-name = "discord-automation"
+name = "disco"
 version = "0.1.0.dev"
 description = ""
 authors = ["Fabian H. Schneider <discord-automation.primarily965@simplelogin.com>"]
 readme = "README.md"
-packages = [{ include = "discord_automation", from = "src" }, ]
+packages = [{ include = "disco", from = "src" }, ]
 include = ["res/*"]
 
 [tool.poetry.scripts]
-disco = "discord-automation.__main__:main"
+disco = "disco.__main__:main"
 
 [tool.poetry.dependencies]
 python = ">=3.12 <4"

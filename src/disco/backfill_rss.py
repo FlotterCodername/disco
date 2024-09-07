@@ -15,7 +15,7 @@ import xmltodict
 from discord.ext import commands
 from discord.utils import get
 
-from discord_automation import __repo_root__
+from disco import __repo_root__
 
 
 @dataclass
