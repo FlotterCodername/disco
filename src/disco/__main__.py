@@ -23,9 +23,9 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 
-# This is a minimal bot that logs in and immediately logs out
+# This is a minimal bot logs in
 @bot.event
-def on_ready():
+async def on_ready():  # noqa RUF029
     logger.info(f"Logged in as {bot.user}")
 
 
