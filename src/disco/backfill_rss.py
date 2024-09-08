@@ -10,12 +10,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import discord
-import keyring
 import xmltodict
 from discord.ext import commands
 from discord.utils import get
 
 from disco import __repo_root__
+from disco.helpers import get_discord_bot_token, get_log_handler
 
 
 @dataclass
@@ -59,7 +59,7 @@ async def on_ready():
     print(f"Logged in as {bot.user}")
 
     guild_name = "Inoffizielle NZ Testumgebung"  # Replace with your guild name
-    channel_name = "rss-feeds"  # Replace with your channel name
+    channel_name = "rss-test"  # Replace with your channel name
     tryout = True
     counter = 0
     for guild in bot.guilds:
@@ -83,5 +83,4 @@ async def on_ready():
     await bot.close()
 
 
-# to store: keyring.set_password("org.flottercodername.disco", "@@token", "<your token>")
-bot.run(keyring.get_password("org.flottercodername.disco", "@@token"))
+bot.run(token=get_discord_bot_token(), log_handler=get_log_handler())

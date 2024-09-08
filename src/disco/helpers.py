@@ -7,13 +7,31 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 """
 
 import json
-import sys
+import logging
+from logging import handlers
 
 import keyring
 from atomicwrites import atomic_write
 
+from disco import __product__
 from disco.definitions import SERVICE_NAME, USERNAME
 from disco.paths import SECRETS_JSON
+
+
+def get_log_handler() -> handlers.RotatingFileHandler:
+    """
+    Configure the logging for the bot (taken from `discord.py docs
+    <https://discordpy.readthedocs.io/en/v2.4.0/logging.html>`_.)
+
+    :return: The logging handler
+    """
+    handler = handlers.RotatingFileHandler(
+        filename=f"{__product__}.log", encoding="utf-8", maxBytes=32 * 1024 * 1024, backupCount=5
+    )
+    dt_fmt = "%Y-%m-%d %H:%M:%S"
+    formatter = logging.Formatter("[{asctime}] [{levelname:<8}] {name}: {message}", dt_fmt, style="{")
+    handler.setFormatter(formatter)
+    return handler
 
 
 def get_discord_bot_token() -> str:
@@ -33,6 +51,5 @@ def get_discord_bot_token() -> str:
             return token
         # to store token: keyring.set_password(SERVICE_NAME, USERNAME, "<your token>")
         return keyring.get_password(SERVICE_NAME, USERNAME)
-    except Exception:
-        print("Failed to obtain token.")
-        sys.exit(1)
+    except Exception as e:
+        raise RuntimeError("Failed to obtain token.") from e
