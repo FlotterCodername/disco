@@ -39,7 +39,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build container for ARM64
+      - name: Build container
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -47,14 +47,4 @@ jobs:
           tags: |
             ${{ steps.meta.outputs.tags }}
             ghcr.io/${{ env.lowercase_repo }}:latest
-          platforms: linux/arm64
-
-      - name: Build container for AMD64
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: |
-            ${{ steps.meta.outputs.tags }}
-            ghcr.io/${{ env.lowercase_repo }}:latest
-          platforms: linux/amd64
+          platforms: linux/arm64,linux/amd64
