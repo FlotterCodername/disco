@@ -22,6 +22,9 @@ ENV PATH="/root/.local/bin:$PATH"
 # Install the dependencies
 RUN poetry install --sync --no-root
 
+# Show where the interpreter is located
+RUN poetry run which python
+
 # Copy the rest of the application code into the container
 COPY . /app
 
