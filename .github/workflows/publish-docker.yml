@@ -17,20 +17,28 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4.1.7
+
+      - name: Set lowercase repository name
+        id: set-lowercase-repo
+        run: echo "lowercase_repo=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository }}
+          images: ghcr.io/${{ env.lowercase_repo }}
           tags: type=sha
+
       - name: Login to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build container for ARM64
         uses: docker/build-push-action@v5
         with:
@@ -38,8 +46,9 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ env.lowercase_repo }}:latest
           platforms: linux/arm64
+
       - name: Build container for AMD64
         uses: docker/build-push-action@v5
         with:
@@ -47,5 +56,5 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ env.lowercase_repo }}:latest
           platforms: linux/amd64
