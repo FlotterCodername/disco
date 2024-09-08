@@ -35,20 +35,22 @@ def get_log_handler() -> handlers.RotatingFileHandler:
     return handler
 
 
-def get_discord_bot_token() -> str:
+def get_discord_bot_token(scrub_token: bool = False) -> str:
     """
     Get the Discord bot token from the secrets file or keyring,
     and scrub it from the secrets file atomically using atomicwrites.
 
+    :param scrub_token: Whether to scrub the token from the secrets file (currently not compatible with Docker build)
     :return: The Discord bot token
     """
     try:
         if SECRETS_JSON.is_file():
             loaded = json.loads(SECRETS_JSON.read_text())
             token = loaded[SERVICE_NAME][USERNAME]
-            loaded[SERVICE_NAME][USERNAME] = None
-            with atomic_write(SECRETS_JSON, mode="w", overwrite=True) as f:
-                json.dump(loaded, f)
+            if scrub_token:
+                loaded[SERVICE_NAME][USERNAME] = None
+                with atomic_write(SECRETS_JSON, mode="w", overwrite=True) as f:
+                    json.dump(loaded, f)
             return token
         # to store token: keyring.set_password(SERVICE_NAME, USERNAME, "<your token>")
         return keyring.get_password(SERVICE_NAME, USERNAME)
