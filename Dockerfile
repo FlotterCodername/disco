@@ -24,7 +24,7 @@ RUN apt update &&  \
     (curl -sSL https://install.python-poetry.org | python3 -)
 
 # Install the dependencies
-RUN poetry config virtualenvs.create false && \
+RUN poetry config virtualenvs.create true && \
     poetry config virtualenvs.in-project true && \
     poetry install --sync --without=dev --no-root
 
