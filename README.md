@@ -9,3 +9,24 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 Discord automation stuff
+
+## How to set it up?
+
+Pull the docker image from the GitHub Container Registry:
+```bash
+docker pull ghcr.io/flottercodername/disco
+```
+
+Prepare your Discord App secret as JSON file for mounting, e.g. at `~/.disco/run/secrets.json`:
+```json
+{
+  "org.flottercodername.disco": {
+    "@@token": "YOUR_TOKEN_HERE"
+  }
+}
+```
+
+Run the container while mounting the secrets file at `/var/disco/run/secrets.json`:
+```bash
+docker run --volume ~/.disco/run/secrets.json:/var/disco/run/secrets.json ghcr.io/flottercodername/disco
+```
