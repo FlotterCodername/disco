@@ -25,11 +25,12 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 # This is a minimal bot logs in
 @bot.event
-async def on_ready():  # noqa RUF029
+async def on_ready() -> None:  # noqa RUF029
     logger.info(f"Logged in as {bot.user}")
 
 
-if __name__ == "__main__":
+def main():
+    """Entry point for the Discord bot."""
     try:
         bot.run(token=get_discord_bot_token(), log_handler=get_log_handler())
     except Exception as e:
@@ -38,3 +39,7 @@ if __name__ == "__main__":
         else:
             print("An error occurred.", file=sys.stderr)
         sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
