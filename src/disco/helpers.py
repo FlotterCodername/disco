@@ -15,7 +15,7 @@ from atomicwrites import atomic_write
 
 from disco import __product__
 from disco.definitions import SERVICE_NAME, USERNAME
-from disco.paths import SECRETS_JSON
+from disco.paths import DISCO_LOG, SECRETS_JSON
 
 
 def get_log_handler() -> handlers.RotatingFileHandler:
@@ -25,8 +25,9 @@ def get_log_handler() -> handlers.RotatingFileHandler:
 
     :return: The logging handler
     """
+    DISCO_LOG.mkdir(parents=True, exist_ok=True)
     handler = handlers.RotatingFileHandler(
-        filename=f"{__product__}.log", encoding="utf-8", maxBytes=32 * 1024 * 1024, backupCount=5
+        filename=DISCO_LOG / f"{__product__}.log", encoding="utf-8", maxBytes=32 * 1024 * 1024, backupCount=5
     )
     dt_fmt = "%Y-%m-%d %H:%M:%S"
     formatter = logging.Formatter("[{asctime}] [{levelname:<8}] {name}: {message}", dt_fmt, style="{")
