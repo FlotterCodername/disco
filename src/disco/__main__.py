@@ -7,8 +7,9 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 """
 
 import discord
-import keyring
 from discord.ext import commands
+
+from disco.helpers import get_discord_bot_token
 
 # Discord bot setup
 intents = discord.Intents.default()
@@ -23,5 +24,4 @@ async def on_ready():
     await bot.close()
 
 
-# to store token: keyring.set_password("org.flottercodername.disco", "@@token", "<your token>")
-bot.run(keyring.get_password("org.flottercodername.disco", "@@token"))
+bot.run(get_discord_bot_token())
