@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/${{ github.repository_id }}
+          images: ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
           tags: type=sha
       - name: Login to GHCR
         uses: docker/login-action@v3
