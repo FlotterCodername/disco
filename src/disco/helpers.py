@@ -53,4 +53,4 @@ def get_discord_bot_token() -> str:
         # to store token: keyring.set_password(SERVICE_NAME, USERNAME, "<your token>")
         return keyring.get_password(SERVICE_NAME, USERNAME)
     except Exception as e:
-        raise RuntimeError("Failed to obtain token.") from e
+        raise RuntimeError(f"Failed to obtain token:\n{e}")
