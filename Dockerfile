@@ -13,11 +13,11 @@ WORKDIR /app
 # Copy the requirements file into the container
 COPY poetry.lock pyproject.toml /app/
 
+# Configure environment
+ENV PATH="/root/.local/bin:$PATH"
+
 # Install linux dependencies and poetry
 RUN apt update && apt install -y curl && rm -rf /var/lib/apt/lists/* && (curl -sSL https://install.python-poetry.org | python3 -)
-
-# Add Poetry to the PATH
-ENV PATH="/root/.local/bin:$PATH"
 
 # Install the dependencies
 RUN poetry install --sync --no-root
