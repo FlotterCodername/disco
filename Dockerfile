@@ -33,3 +33,6 @@ COPY . /app
 
 # Install the application
 RUN poetry install --sync --without=dev
+
+# Set the default command to run the bot
+CMD ["poetry", "run", "disco"]
