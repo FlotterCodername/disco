@@ -9,9 +9,11 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 import os
 from pathlib import Path
 
-DISCO_RUN = Path(os.getenv("DISCO_RUN", Path.home() / ".disco" / "run")).resolve()
-DISCO_LOG = Path(os.getenv("DISCO_LOG", Path.home() / ".disco" / "log")).resolve()
-if os.getenv("DISCO_IS_DOCKER"):
+from disco.definitions import EV
+
+DISCO_RUN = Path(os.getenv(EV.DISCO_RUN, Path.home() / ".disco" / "run")).resolve()
+DISCO_LOG = Path(os.getenv(EV.DISCO_LOG, Path.home() / ".disco" / "log")).resolve()
+if os.getenv(EV.DISCO_IS_DOCKER):
     DISCO_RUN = Path("/var/disco/run/")
     DISCO_LOG = Path("/var/disco/log/")
 SECRETS_JSON = DISCO_RUN / "secrets.json"
