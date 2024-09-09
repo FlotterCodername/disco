@@ -34,7 +34,7 @@ jobs:
       - name: Run pre-commit on all files
         id: pre-commit
         run: |
-          pre-commit run --all-files | tee msg.txt; echo "$?" >> $GITHUB_OUTPUT
+          pre-commit run --all-files | tee msg.txt; echo "status=$?" >> $GITHUB_OUTPUT
 
       - name: Set commit message
         id: commit-message
@@ -57,4 +57,4 @@ jobs:
       - name: pre-commit result
         run: |
           printf '%s\n' "${{ steps.commit-message.outputs.message }}"
-          exit ${{ steps.commit-message.outputs.message }}
+          exit ${{ steps.pre-commit.outputs.status }}
