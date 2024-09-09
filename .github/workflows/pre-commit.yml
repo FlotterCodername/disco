@@ -37,28 +37,29 @@ jobs:
           pre-commit run --all-files | tee msg.txt || echo "status=$?" >> $GITHUB_OUTPUT
 
       - name: Set commit message
-        id: commit_message
+        id: commit-message
         run: |
-          echo 'commit_message<<EOF' >> $GITHUB_OUTPUT
+          sed -i '/^\[INFO\]/d' msg.txt
+          echo 'message<<EOF' >> $GITHUB_OUTPUT
           cat msg.txt >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
           rm -rf msg.txt
 
       - uses: stefanzweifel/git-auto-commit-action@v5.0.1
         with:
-          commit_message: ${{ steps.commit_message.outputs.commit_message }}
+          commit_message: ${{ steps.commit-message.outputs.message }}
           branch: ${{ github.ref }}
 
       # TODO: Sign commit: https://github.com/marketplace/actions/git-auto-commit#signing-commits
 
-      - name: pre-commit ❎
-        if: steps.pre-commit.outputs.status != '0'
-        run: |
-          echo ${{ steps.commit_message.outputs.commit_message }}
-          exit 1
-
       - name: pre-commit ✅
         if: steps.pre-commit.outputs.status == '0'
         run: |
-          echo ${{ steps.commit_message.outputs.commit_message }}
+          printf '%s\n' "${{ steps.commit-message.outputs.message }}"
           exit 0
+
+      - name: pre-commit ❎
+        if: steps.pre-commit.outputs.status != '0'
+        run: |
+          printf '%s\n' "${{ steps.commit-message.outputs.message }}"
+          exit 1
