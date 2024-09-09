@@ -41,6 +41,8 @@ jobs:
         run: |
           sed -i '/^\[INFO\]/d' msg.txt
           echo 'message<<EOF' >> $GITHUB_OUTPUT
+          echo 'Run pre-commit' >> $GITHUB_OUTPUT
+          echo '' >> $GITHUB_OUTPUT 
           cat msg.txt >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
           rm -rf msg.txt
@@ -55,11 +57,11 @@ jobs:
       - name: pre-commit ✅
         if: steps.pre-commit.outputs.status == '0'
         run: |
-          printf '\n%s\n' "${{ steps.commit-message.outputs.message }}"
+          printf '%s\n' "${{ steps.commit-message.outputs.message }}"
           exit 0
 
       - name: pre-commit ❎
         if: steps.pre-commit.outputs.status != '0'
         run: |
-          printf '\n%s\n' "${{ steps.commit-message.outputs.message }}"
+          printf '%s\n' "${{ steps.commit-message.outputs.message }}"
           exit 1
