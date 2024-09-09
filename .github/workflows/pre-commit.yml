@@ -34,7 +34,7 @@ jobs:
       - name: Run pre-commit on all files
         id: pre-commit
         run: |
-          pre-commit run --all-files | tee msg.txt; echo "status=$?" >> $GITHUB_OUTPUT
+          pre-commit run --all-files | tee msg.txt; echo "$?" >> $GITHUB_OUTPUT
 
       - name: Set commit message
         id: commit-message
@@ -54,14 +54,7 @@ jobs:
 
       # TODO: Sign commit: https://github.com/marketplace/actions/git-auto-commit#signing-commits
 
-      - name: pre-commit ✅
-        if: steps.pre-commit.outputs.status == '0'
+      - name: pre-commit result
         run: |
           printf '%s\n' "${{ steps.commit-message.outputs.message }}"
-          exit 0
-
-      - name: pre-commit ❎
-        if: steps.pre-commit.outputs.status != '0'
-        run: |
-          printf '%s\n' "${{ steps.commit-message.outputs.message }}"
-          exit 1
+          exit ${{ steps.commit-message.outputs.message }}
