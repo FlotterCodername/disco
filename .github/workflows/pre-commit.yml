@@ -31,16 +31,17 @@ jobs:
 
       - uses: actions/checkout@v4.1.7
 
-      - name: Run pre-commit on modified files
+      - name: Run pre-commit on all files
         id: pre-commit
         run: |
-          pre-commit run --all-files || echo "status=$?" >> $GITHUB_OUTPUT
+          pre-commit run --all-files | tee msg.txt || echo "status=$?" >> $GITHUB_OUTPUT
 
       - uses: stefanzweifel/git-auto-commit-action@v5.0.1
         with:
           commit_message: Run pre-commit
           branch: ${{ github.ref }}
 
-      - name: Fail if pre-commit failed
-        if: steps.pre-commit.outputs.status != '0'
-        run: exit 1
+      - name: pre-commit result
+        run: |
+          cat msg.txt
+          exit ${{ steps.pre-commit.outputs.status }}
