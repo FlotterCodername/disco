@@ -26,7 +26,12 @@ class Episode:
     artwork: str
 
     @classmethod
-    def load_all(cls):
+    def load_all(cls) -> list["Episode"]:
+        """
+        Load all episodes from the XML file.
+
+        :return: loaded episodes
+        """
         # Load the XML file
         data = xmltodict.parse((Path(__repo_root__) / "res" / "neuezwanziger.xml").read_bytes())
         # Extract episode information
@@ -55,7 +60,8 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 
 @bot.event
-async def on_ready():
+async def on_ready() -> None:
+    """Logged in to Discord, let's backfill a channel with the old RSS entries."""
     print(f"Logged in as {bot.user}")
 
     guild_name = "Inoffizielle NZ Testumgebung"  # Replace with your guild name

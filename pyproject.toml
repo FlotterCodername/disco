@@ -36,6 +36,13 @@ types-jsonschema = "^4.22.0.20240610"
 line-length = 120
 target-version = ["py312"]
 
+[tool.docsig]
+check-class-constructor = true
+check-dunders = true
+check-protected = true
+check-overriden = false
+disable = []
+
 [tool.isort]
 line_length = 120
 profile = "black"

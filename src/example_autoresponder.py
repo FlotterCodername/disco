@@ -24,12 +24,18 @@ RE_RESILIENZ = re.compile(r"resilienz", re.IGNORECASE)
 
 
 @client.event
-def on_ready():
+def on_ready() -> None:
+    """Logged in to Discord, let's log this very important event."""
     print(f"We have logged in as {client.user}")
 
 
 @client.event
-async def on_message(message: discord.Message):
+async def on_message(message: discord.Message) -> None:
+    """
+    Respond to messages that contain 'mindset' or 'resilienz'.
+
+    :param message: the message to (potentially) respond to
+    """
     print(message, type(message))
     if message.author == client.user:
         return
