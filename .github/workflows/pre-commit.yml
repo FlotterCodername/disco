@@ -42,7 +42,7 @@ jobs:
           sed -i '/^\[INFO\]/d' msg.txt
           echo 'message<<EOF' >> $GITHUB_OUTPUT
           echo 'Run pre-commit' >> $GITHUB_OUTPUT
-          echo '' >> $GITHUB_OUTPUT 
+          echo '' >> $GITHUB_OUTPUT
           cat msg.txt >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
           rm -rf msg.txt
