@@ -16,6 +16,13 @@ class _Ev:
     DISCO_RUN: str
 
     def __getattr__(self, item: str) -> str:
+        """
+        A simple getter that returns the attribute name regardless of whether it exists or not. Useful for getting
+        defined attribute-like strings from the class.
+
+        :param item: cf. official Python documentation
+        :return: Name of the attribute
+        """
         return item
 
 
