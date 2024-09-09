@@ -55,11 +55,11 @@ jobs:
       - name: pre-commit ✅
         if: steps.pre-commit.outputs.status == '0'
         run: |
-          printf '%s\n' "${{ steps.commit-message.outputs.message }}"
+          printf '\n%s\n' "${{ steps.commit-message.outputs.message }}"
           exit 0
 
       - name: pre-commit ❎
         if: steps.pre-commit.outputs.status != '0'
         run: |
-          printf '%s\n' "${{ steps.commit-message.outputs.message }}"
+          printf '\n%s\n' "${{ steps.commit-message.outputs.message }}"
           exit 1
