@@ -34,7 +34,7 @@ jobs:
       - name: Run pre-commit on all files
         id: pre-commit
         run: |
-          pre-commit run --all-files | tee msg.txt || echo "status=$?" >> $GITHUB_OUTPUT
+          pre-commit run --all-files | tee msg.txt; echo "status=$?" >> $GITHUB_OUTPUT
 
       - name: Set commit message
         id: commit-message
