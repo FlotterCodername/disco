@@ -1,6 +1,4 @@
 # ---- Project Specific ----
-# Reserved for CI
-/msg.txt
 
 # ---- Python.gitignore ----
 # Source: https://github.com/github/gitignore/blob/main/Python.gitignore
