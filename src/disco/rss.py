@@ -20,6 +20,8 @@ from sqlalchemy.orm import DeclarativeBase, declarative_base, relationship, sess
 
 logger = logging.getLogger("discord")
 
+# TODO Attrs-ORM integration:
+# https://docs.sqlalchemy.org/en/20/orm/dataclasses.html#applying-orm-mappings-to-an-existing-attrs-class
 
 Base: type[DeclarativeBase] = declarative_base()
 
