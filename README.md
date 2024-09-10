@@ -4,6 +4,7 @@
 [![Python Version](https://img.shields.io/badge/python-3.12-blue)](https://www.python.org/downloads/)
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/FlotterCodername/disco/main.svg)](https://results.pre-commit.ci/latest/github/FlotterCodername/disco/main)
 [![☝️🧐 pre-commit](https://github.com/FlotterCodername/disco/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/FlotterCodername/disco/actions/workflows/pre-commit.yml)
 [![📦🐳 Publish Docker](https://github.com/FlotterCodername/disco/actions/workflows/publish-docker.yml/badge.svg)](https://github.com/FlotterCodername/disco/actions/workflows/publish-docker.yml)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
