@@ -14,6 +14,7 @@ disco = "disco.__main__:main"
 python = ">=3.12 <4"
 # Dependencies
 atomicwrites = "^1.4.1"  # https://github.com/untitaker/python-atomicwrites
+attrs = "^24.2.0"  # https://www.attrs.org/en/stable/changelog.html
 cleo = "^2.1.0"  # https://github.com/python-poetry/cleo/blob/main/CHANGELOG.md
 discord-py = "^2.4.0"  # https://discordpy.readthedocs.io/en/stable/whats_new.html
 keyring = "^25.4.0"  # https://github.com/jaraco/keyring/blob/main/NEWS.rst
@@ -21,6 +22,7 @@ jsonschema = "^4.23.0"  # https://github.com/python-jsonschema/jsonschema/releas
 packaging = "*"  # https://packaging.pypa.io/en/stable/changelog.html
 python-dateutil = "^2.9.0.post0"  # https://github.com/dateutil/dateutil/releases
 python-decouple = "^3.8"  # https://github.com/HBNetwork/python-decouple/blob/master/CHANGELOG.md
+sqlalchemy = "^2.0.35"  # https://docs.sqlalchemy.org/en/20/changelog/changelog_20.html
 xmltodict = "^0.13.0"  # https://github.com/martinblech/xmltodict/blob/master/CHANGELOG.md
 yt-dlp = "^2024.8.6"  # https://github.com/yt-dlp/yt-dlp/blob/master/Changelog.md
 
@@ -29,8 +31,10 @@ docsig = "^0.60.1"  # https://docsig.readthedocs.io/en/latest/development/change
 mypy = "^1.10.0"  # https://github.com/python/mypy/blob/master/CHANGELOG.md
 pytest = "^8.3.3"  # https://docs.pytest.org/en/stable/changelog.html
 types-colorama = "^0.4.15.20240311"
-types-requests = "^2.32.0.20240914"
 types-jsonschema = "^4.22.0.20240610"
+types-python-dateutil = "^2.9.0.20240906"
+types-requests = "^2.32.0.20240914"
+types-xmltodict = "^0.13.0.3"
 
 [tool.black]
 line-length = 120
