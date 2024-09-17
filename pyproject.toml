@@ -13,7 +13,6 @@ disco = "disco.__main__:main"
 [tool.poetry.dependencies]
 python = ">=3.12 <4"
 # Dependencies
-atomicwrites = "^1.4.1"  # https://github.com/untitaker/python-atomicwrites
 attrs = "^24.2.0"  # https://www.attrs.org/en/stable/changelog.html
 cleo = "^2.1.0"  # https://github.com/python-poetry/cleo/blob/main/CHANGELOG.md
 discord-py = "^2.4.0"  # https://discordpy.readthedocs.io/en/stable/whats_new.html

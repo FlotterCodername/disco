@@ -1,3 +1,4 @@
+# mypy: ignore-errors
 """
 Copyright © 2024 Fabian H. Schneider
 

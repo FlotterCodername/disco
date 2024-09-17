@@ -11,10 +11,10 @@ import logging
 from logging import handlers
 
 import keyring
-from atomicwrites import atomic_write
 
 from disco import __product__
 from disco.definitions import SERVICE_NAME, USERNAME
+from disco.helpers.atomicwrites import atomic_write
 from disco.paths import DISCO_LOG, SECRETS_JSON
 
 
@@ -53,6 +53,9 @@ def get_discord_bot_token(scrub_token: bool = False) -> str:
                     json.dump(loaded, f)
             return token
         # to store token: keyring.set_password(SERVICE_NAME, USERNAME, "<your token>")
-        return keyring.get_password(SERVICE_NAME, USERNAME)
+        pw = keyring.get_password(SERVICE_NAME, USERNAME)
+        if not isinstance(pw, str):
+            raise RuntimeError("Token not found in keyring.")
+        return pw
     except Exception as e:
         raise RuntimeError(f"Failed to obtain token:\n{e}")
