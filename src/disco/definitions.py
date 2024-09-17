@@ -12,8 +12,7 @@ class _Ev:
 
     DISCO_IS_DEBUG: str
     DISCO_IS_DOCKER: str
-    DISCO_LOG: str
-    DISCO_RUN: str
+    DISCO_HOME: str
 
     def __getattr__(self, item: str) -> str:
         """

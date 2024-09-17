@@ -11,9 +11,13 @@ from pathlib import Path
 
 from disco.definitions import EV
 
-DISCO_RUN = Path(os.getenv(EV.DISCO_RUN, Path.home() / ".disco" / "run")).resolve()
-DISCO_LOG = Path(os.getenv(EV.DISCO_LOG, Path.home() / ".disco" / "log")).resolve()
+DISCO_HOME = Path(os.getenv(EV.DISCO_HOME, Path.home() / ".disco")).resolve()
 if os.getenv(EV.DISCO_IS_DOCKER):
-    DISCO_RUN = Path("/var/disco/run/")
-    DISCO_LOG = Path("/var/disco/log/")
+    DISCO_HOME = Path("/var/disco")
+
+DISCO_RUN = DISCO_HOME / "run"
 SECRETS_JSON = DISCO_RUN / "secrets.json"
+
+DISCO_LOG = DISCO_HOME / "log"
+
+DISCO_SQLITE = DISCO_HOME / "sqlite"

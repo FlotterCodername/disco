@@ -69,4 +69,4 @@ repos:
       - id: mypy
         language_version: python3.12
         additional_dependencies:
-          [ types-colorama, types-jsonschema, types-requests ]
+          [ types-colorama, types-jsonschema, types-python-dateutil, types-requests ]
