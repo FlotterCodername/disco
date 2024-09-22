@@ -1827,6 +1827,17 @@ files = [
 ]
 
 [[package]]
+name = "tomli-w"
+version = "1.0.0"
+description = "A lil' TOML writer"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tomli_w-1.0.0-py3-none-any.whl", hash = "sha256:9f2a07e8be30a0729e533ec968016807069991ae2fd921a78d42f429ae5f4463"},
+    {file = "tomli_w-1.0.0.tar.gz", hash = "sha256:f463434305e0336248cac9c2dc8076b707d8a12d019dd349f5c1e382dd1ae1b9"},
+]
+
+[[package]]
 name = "types-colorama"
 version = "0.4.15.20240311"
 description = "Typing stubs for colorama"
@@ -2185,4 +2196,4 @@ test = ["pytest (>=8.1,<9.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12 <4"
-content-hash = "3c4e4e5f52fcceb331927e5de881edd8642ff029f366d28f983197130aae831d"
+content-hash = "2fe7d01e355c436edb2feaa667141864383a7bb9bf9e9ddda607b76044624671"

@@ -22,6 +22,7 @@ jsonschema = "^4.23.0"  # https://github.com/python-jsonschema/jsonschema/releas
 packaging = "*"  # https://packaging.pypa.io/en/stable/changelog.html
 python-dateutil = "^2.9.0.post0"  # https://github.com/dateutil/dateutil/releases
 python-decouple = "^3.8"  # https://github.com/HBNetwork/python-decouple/blob/master/CHANGELOG.md
+tomli-w = "^1.0.0"  # https://github.com/hukkin/tomli-w/blob/master/CHANGELOG.md
 xmltodict = "^0.13.0"  # https://github.com/martinblech/xmltodict/blob/master/CHANGELOG.md
 yt-dlp = "^2024.8.6"  # https://github.com/yt-dlp/yt-dlp/blob/master/Changelog.md
 
