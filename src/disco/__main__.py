@@ -6,18 +6,17 @@ If a copy of the MPL was not distributed with this file,
 You can obtain one at https://mozilla.org/MPL/2.0/.
 """
 
-import logging
 import os
 import sys
 
 import discord
 from discord.ext import commands
 
+from disco import logger
 from disco.definitions import EV
 from disco.helpers import get_discord_bot_token, get_log_handler
 
 # Discord bot setup
-logger = logging.getLogger("discord")
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)

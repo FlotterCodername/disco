@@ -6,6 +6,7 @@ If a copy of the MPL was not distributed with this file,
 You can obtain one at https://mozilla.org/MPL/2.0/.
 """
 
+import logging
 import pathlib
 from importlib.metadata import version
 
@@ -18,3 +19,5 @@ __version_obj__: Version = parse(__version__)
 __repo_root__ = pathlib.Path(__file__).parent.parent.parent  # incompatible with dists!
 __product__: str = "disco"
 __ua_header__: dict = {"User-Agent": f"{__product__}/{__version__}"}
+
+logger = logging.getLogger(__product__)
