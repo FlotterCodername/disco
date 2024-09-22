@@ -14,20 +14,36 @@ Discord automation stuff
 ## How to set it up?
 
 Pull the docker image from the GitHub Container Registry:
+
 ```bash
 docker pull ghcr.io/flottercodername/disco
 ```
 
-Prepare your Discord App secret as JSON file for mounting, e.g. at `~/.disco/run/secrets.json`:
+Prepare a host directory for the container to store its data, e.g. at `~/.disco`:
+
+```
+disco/
+  log/
+    disco.log  # Automatically created
+  run/
+    secrets.json
+  sqlite/
+    db.sqlite3  # Automatically created
+```
+
+In this directory, the only thing you need to provide ahead of time is your *Discord App secret*. Store this in
+`secrets.json`:
+
 ```json
 {
-  "org.flottercodername.disco": {
-    "@@token": "YOUR_TOKEN_HERE"
-  }
+    "org.flottercodername.disco": {
+        "@@token": "YOUR_TOKEN_HERE"
+    }
 }
 ```
 
-Run the container while mounting the secrets file at `/var/disco/run/secrets.json`:
+Run the container while mounting the host directory at `/var/disco/`:
+
 ```bash
-docker run --volume ~/.disco/run/secrets.json:/var/disco/run/secrets.json ghcr.io/flottercodername/disco
+docker run --volume ~/.disco/:/var/disco/ ghcr.io/flottercodername/disco
 ```

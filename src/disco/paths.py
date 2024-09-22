@@ -16,6 +16,7 @@ if os.getenv(EV.DISCO_IS_DOCKER):
     DISCO_HOME = Path("/var/disco")
 
 DISCO_RUN = DISCO_HOME / "run"
+DISCO_RUN.mkdir(parents=True, exist_ok=True)
 SECRETS_JSON = DISCO_RUN / "secrets.json"
 
 DISCO_LOG = DISCO_HOME / "log"
