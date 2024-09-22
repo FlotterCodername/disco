@@ -19,5 +19,7 @@ DISCO_RUN = DISCO_HOME / "run"
 SECRETS_JSON = DISCO_RUN / "secrets.json"
 
 DISCO_LOG = DISCO_HOME / "log"
+DISCO_LOG.mkdir(parents=True, exist_ok=True)
 
 DISCO_SQLITE = DISCO_HOME / "sqlite"
+DISCO_SQLITE.mkdir(parents=True, exist_ok=True)
