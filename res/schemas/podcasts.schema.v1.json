@@ -7,14 +7,14 @@
       "name": {
         "type": "string"
       },
-      "url_feed": {
+      "url-feed": {
         "format": "uri",
         "type": "string"
       }
     },
     "required": [
       "name",
-      "url_feed"
+      "url-feed"
     ],
     "type": "object"
   },

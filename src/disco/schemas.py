@@ -25,9 +25,9 @@ podcasts = {
         "type": "object",
         "properties": {
             "name": {"type": "string"},
-            "url_feed": {"type": "string", "format": "uri"},
+            "url-feed": {"type": "string", "format": "uri"},
         },
-        "required": ["name", "url_feed"],
+        "required": ["name", "url-feed"],
         "additionalProperties": false,
     },
 }
