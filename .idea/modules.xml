@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/discord-automation.iml" filepath="$PROJECT_DIR$/.idea/discord-automation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/disco.iml" filepath="$PROJECT_DIR$/.idea/disco.iml" />
     </modules>
   </component>
 </project>
