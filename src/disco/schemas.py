@@ -20,15 +20,21 @@ _base_uri = "https://raw.githubusercontent.com/FlotterCodername/disco/refs/heads
 podcasts = {
     "$id": f"{_base_uri}/podcasts.schema.v1.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "array",
-    "items": {
-        "type": "object",
-        "properties": {
-            "name": {"type": "string"},
-            "url-feed": {"type": "string", "format": "uri"},
+    "type": "object",
+    "properties": {
+        "$schema": {"type": "string", "format": "uri"},
+        "podcast": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "url-feed": {"type": "string", "format": "uri"},
+                },
+                "required": ["name", "url-feed"],
+                "additionalProperties": false,
+            },
         },
-        "required": ["name", "url-feed"],
-        "additionalProperties": false,
     },
 }
 secrets = {
@@ -37,14 +43,14 @@ secrets = {
     "type": "object",
     "properties": {
         "$schema": {"type": "string", "format": "uri"},
-        "org.flottercodername.disco": {
+        "disco": {
             "type": "object",
-            "properties": {"@@token": {"type": "string"}},
-            "required": ["@@token"],
+            "properties": {"token": {"type": "string"}},
+            "required": ["token"],
             "additionalProperties": false,
         },
     },
-    "required": ["org.flottercodername.disco"],
+    "required": ["disco"],
     "additionalProperties": false,
 }
 

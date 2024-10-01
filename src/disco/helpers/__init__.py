@@ -6,16 +6,15 @@ If a copy of the MPL was not distributed with this file,
 You can obtain one at https://mozilla.org/MPL/2.0/.
 """
 
-import json
 import logging
 from logging import handlers
 
-import keyring
+import tomli_w
 
 from disco import __product__
-from disco.definitions import SERVICE_NAME, USERNAME
+from disco.configuration import Configurations
 from disco.helpers.atomicwrites import atomic_write
-from disco.paths import DISCO_LOG, SECRETS_JSON
+from disco.paths import DISCO_LOG, SECRETS_TOML
 
 
 def get_log_handler() -> handlers.RotatingFileHandler:
@@ -44,18 +43,14 @@ def get_discord_bot_token(scrub_token: bool = False) -> str:
     :return: The Discord bot token
     """
     try:
-        if SECRETS_JSON.is_file():
-            loaded = json.loads(SECRETS_JSON.read_text())
-            token = loaded[SERVICE_NAME][USERNAME]
-            if scrub_token:
-                loaded[SERVICE_NAME][USERNAME] = None
-                with atomic_write(SECRETS_JSON, mode="w", overwrite=True) as f:
-                    json.dump(loaded, f)
-            return token
-        # to store token: keyring.set_password(SERVICE_NAME, USERNAME, "<your token>")
-        pw = keyring.get_password(SERVICE_NAME, USERNAME)
-        if not isinstance(pw, str):
-            raise RuntimeError("Token not found in keyring.")
-        return pw
+        if not Configurations.secrets.exists:
+            raise RuntimeError(f"Missing configuration file at {Configurations.secrets.path}")
+        loaded = Configurations.secrets.content
+        token = loaded["disco"]["token"]
+        if scrub_token:
+            loaded["disco"]["token"] = None
+            with atomic_write(SECRETS_TOML, mode="w", overwrite=True) as f:
+                tomli_w.dump(loaded, f)
+        return token
     except Exception as e:
         raise RuntimeError(f"Failed to obtain token:\n{e}")

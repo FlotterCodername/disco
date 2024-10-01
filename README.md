@@ -26,20 +26,17 @@ disco/
   log/
     disco.log  # Automatically created
   run/
-    secrets.json
+    secrets.toml
   sqlite/
     db.sqlite3  # Automatically created
 ```
 
 In this directory, the only thing you need to provide ahead of time is your *Discord App secret*. Store this in
-`secrets.json`:
+`secrets.toml`:
 
-```json
-{
-    "org.flottercodername.disco": {
-        "@@token": "YOUR_TOKEN_HERE"
-    }
-}
+```toml
+[disco]
+token = "YOUR_TOKEN_HERE"
 ```
 
 Run the container while mounting the host directory at `/var/disco/`:

@@ -26,6 +26,3 @@ class _Ev:
 
 
 EV = _Ev()
-
-SERVICE_NAME = "org.flottercodername.disco"
-USERNAME = "@@token"
