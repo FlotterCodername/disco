@@ -20,6 +20,16 @@ _base_uri = "https://raw.githubusercontent.com/FlotterCodername/disco/refs/heads
 podcasts = {
     "$id": f"{_base_uri}/podcasts.schema.v1.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "name": {"type": "string"},
+            "url_feed": {"type": "string", "format": "uri"},
+        },
+        "required": ["name", "url_feed"],
+        "additionalProperties": false,
+    },
 }
 secrets = {
     "$id": f"{_base_uri}/secrets.schema.v1.json",

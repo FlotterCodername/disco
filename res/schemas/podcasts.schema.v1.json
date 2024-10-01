@@ -1,4 +1,22 @@
 {
   "$id": "https://raw.githubusercontent.com/FlotterCodername/disco/refs/heads/main/res/schemas/podcasts.schema.v1.json",
-  "$schema": "https://json-schema.org/draft/2020-12/schema"
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "items": {
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "url_feed": {
+        "format": "uri",
+        "type": "string"
+      }
+    },
+    "required": [
+      "name",
+      "url_feed"
+    ],
+    "type": "object"
+  },
+  "type": "array"
 }
