@@ -9,6 +9,7 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 import os
 from pathlib import Path
 
+from disco import __repo_root__
 from disco.definitions import EV
 
 DISCO_HOME = Path(os.getenv(EV.DISCO_HOME, Path.home() / ".disco")).resolve()
@@ -25,3 +26,7 @@ DISCO_LOG.mkdir(parents=True, exist_ok=True)
 
 DISCO_SQLITE = DISCO_HOME / "sqlite"
 DISCO_SQLITE.mkdir(parents=True, exist_ok=True)
+DISCO_DB = DISCO_SQLITE / "db.sqlite3"
+
+# DJANGO
+MANAGE_PY = __repo_root__ / "manage.py"

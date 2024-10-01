@@ -6,15 +6,21 @@ If a copy of the MPL was not distributed with this file,
 You can obtain one at https://mozilla.org/MPL/2.0/.
 """
 
+import asyncio
 import os
 import sys
+import textwrap
+from datetime import UTC, datetime
 
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
+from discord.state import Channel
+from discord.utils import get
 
-from disco import logger
 from disco.definitions import EV
-from disco.helpers import get_discord_bot_token, get_log_handler
+from disco.helpers import get_discord_bot_token, get_log_handler, logger
+from disco.helpers.database import bootstrap
+from disco.models import Episode, Podcast
 
 # Discord bot setup
 intents = discord.Intents.default()
@@ -22,11 +28,69 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 
-# This is a minimal bot logs in
+@tasks.loop(minutes=5)
+async def synchronize_podcasts() -> None:
+    """Synchronize podcasts every 5 minutes."""
+    logger.info("Synchronizing podcasts...")
+
+    def sync_get_podcasts() -> list[Podcast]:
+        _podcasts: list[Podcast] = Podcast.objects.all()
+        for _podcast in _podcasts:
+            logger.info(f"Syncing podcast: {_podcast.name}")
+            _podcast.update()
+        return _podcasts
+
+    podcasts = await asyncio.to_thread(sync_get_podcasts)
+
+    def sync_get_episodes(_podcast: Podcast) -> list[Episode]:
+        return [*Episode.objects.filter(date_forwarded=None, podcast=_podcast).order_by("date_published")]
+
+    for podcast in podcasts:
+        episodes: list[Episode] = await asyncio.to_thread(sync_get_episodes, podcast)
+        channel = None
+        guild = None
+        for _guild in bot.guilds:
+            guild = _guild if _guild.name == podcast.forward_guild else guild
+            channel = get(guild.channels, name=podcast.forward_channel)
+        if not guild:
+            logger.warning(f"Guild {podcast.forward_channel} not found")
+        if guild and not channel:
+            logger.warning(f"Channel {podcast.forward_channel} not found in guild {guild}")
+        if channel:
+            logger.info(f"Channel ID for {podcast.forward_channel}: {channel.id}")
+            await _publish_episodes(episodes, channel)
+
+
+async def _publish_episodes(episodes: list[Episode], channel: Channel) -> None:
+    """
+    McCabe complexity reduction for the `synchronize_podcasts` task.
+
+    :param episodes: The episodes to publish
+    :param channel: The channel to publish to
+    """
+
+    def sync_update_episode(_episode: Episode) -> None:
+        _episode.date_forwarded = datetime.now(tz=UTC)
+        _episode.save()
+
+    for episode in episodes:
+        logger.info(f"Publishing episode from {episode.date_published}: '{episode.title}'")
+        embed = discord.Embed(
+            title=episode.title,
+            url=episode.url_episode,
+            description=textwrap.shorten(episode.summary or episode.subtitle, 240),
+            timestamp=episode.date_published,
+        )
+        embed.set_image(url=episode.url_artwork)
+        await channel.send(embed=embed)
+        await asyncio.to_thread(sync_update_episode, episode)
+
+
 @bot.event
 async def on_ready() -> None:  # noqa RUF029
     """Logged in to Discord, let's log this very important event."""
     logger.info(f"Logged in as {bot.user}")
+    synchronize_podcasts.start()
 
 
 def main() -> int:
@@ -36,7 +100,8 @@ def main() -> int:
     :return: exit code
     """
     try:
-        bot.run(token=get_discord_bot_token(), log_handler=get_log_handler())
+        bootstrap()
+        bot.run(token=get_discord_bot_token(), log_handler=get_log_handler("bot"))
     except Exception as e:
         if os.getenv(EV.DISCO_IS_DEBUG):
             print(f"An error occurred:\n{e}", file=sys.stderr)

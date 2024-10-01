@@ -30,8 +30,8 @@ class Configuration:
 
     @property
     def content(self) -> dict:
-        """Load the configuration from the filesystem."""
-        loaded = tomllib.load(self.path.open("b"))
+        """Load the configuration from the filesystem with validation."""
+        loaded = tomllib.load(self.path.open("rb"))
         jsonschema.validate(loaded, self.schema)
         return loaded
 
