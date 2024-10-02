@@ -14,7 +14,7 @@ from disco.definitions import EV
 
 DISCO_HOME = Path(os.getenv(EV.DISCO_HOME, Path.home() / ".disco")).resolve()
 if os.getenv(EV.DISCO_IS_DOCKER):
-    DISCO_HOME = Path("/var/disco")
+    DISCO_HOME = Path("/opt/disco")
 
 DISCO_RUN = DISCO_HOME / "run"
 DISCO_RUN.mkdir(parents=True, exist_ok=True)

@@ -19,16 +19,17 @@ Pull the docker image from the GitHub Container Registry:
 docker pull ghcr.io/flottercodername/disco
 ```
 
-Prepare a host directory for the container to store its data, e.g. at `~/.disco`:
+Prepare a host directory for the container to store its data, e.g. at `/opt/disco/`:
 
 ```
-disco/
-  log/
-    disco.log  # Automatically created
-  run/
-    secrets.toml
-  sqlite/
-    db.sqlite3  # Automatically created
+opt/
+  disco/
+    log/
+      disco.log  # Automatically created
+    run/
+      secrets.toml
+    sqlite/
+      db.sqlite3  # Automatically created
 ```
 
 In this directory, the only thing you need to provide ahead of time is your *Discord App secret*. Store this in
@@ -39,8 +40,8 @@ In this directory, the only thing you need to provide ahead of time is your *Dis
 token = "YOUR_TOKEN_HERE"
 ```
 
-Run the container while mounting the host directory at `/var/disco/`:
+Run the container while mounting the host directory at `/opt/disco/`:
 
 ```bash
-docker run --volume ~/.disco/:/var/disco/ ghcr.io/flottercodername/disco
+docker run --volume /opt/disco/:/opt/disco/ ghcr.io/flottercodername/disco
 ```
