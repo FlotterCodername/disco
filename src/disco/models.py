@@ -63,10 +63,11 @@ class Podcast(models.Model):
         with suppress(KeyError, ValueError):
             self.date_updated = dateutil.parser.parse(feed["updated"])
         episodes = Episode.load_all(self, feed)
-        max_date = max(episodes, key=lambda e: e.date_published).date_published
-        for episode in episodes:
-            episode.save()
-        self.date_cutoff = max_date
+        if episodes:
+            max_date = max(episodes, key=lambda e: e.date_published).date_published
+            for episode in episodes:
+                episode.save()
+            self.date_cutoff = max_date
         self.date_checked = datetime.now(tz=UTC)
         self.save()
 
