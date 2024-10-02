@@ -8,7 +8,7 @@
           <list>
             <DockerVolumeBindingImpl>
               <option name="containerPath" value="/var/disco/" />
-              <option name="hostPath" value="$USER_HOME$\.disco\" />
+              <option name="hostPath" value="C:\Users\fabia\.disco" />
             </DockerVolumeBindingImpl>
           </list>
         </option>
