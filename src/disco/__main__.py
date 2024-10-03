@@ -23,7 +23,8 @@ from disco.helpers.database import bootstrap
 from disco.models import Episode, Podcast
 
 if TYPE_CHECKING:
-    from discord.types.channel import Channel
+    # noinspection PyProtectedMember
+    from discord.guild import GuildChannel
 
 # Discord bot setup
 intents = discord.Intents.default()
@@ -64,7 +65,7 @@ async def synchronize_podcasts() -> None:
             await _publish_episodes(episodes, channel)
 
 
-async def _publish_episodes(episodes: list[Episode], channel: "Channel") -> None:
+async def _publish_episodes(episodes: list[Episode], channel: "GuildChannel") -> None:
     """
     McCabe complexity reduction for the `synchronize_podcasts` task.
 

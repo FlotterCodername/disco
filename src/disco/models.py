@@ -14,6 +14,7 @@ import dateutil.parser
 import feedparser
 from dateutil.parser import parse
 from django.db import models
+from django.db.models import Manager
 from feedparser import FeedParserDict
 
 from disco.configuration import Configurations
@@ -43,6 +44,7 @@ class Podcast(models.Model):
     date_cutoff = models.DateTimeField(default=datetime.fromtimestamp(0, tz=UTC))
     date_checked = models.DateTimeField(default=datetime.fromtimestamp(0, tz=UTC))
     date_updated = models.DateTimeField(default=datetime.fromtimestamp(0, tz=UTC))
+    objects: Manager
 
     def get_feed(self) -> FeedParserDict:
         """
@@ -102,6 +104,7 @@ class Episode(models.Model):
     date_published = models.DateTimeField()
     date_forwarded = models.DateTimeField(null=True)  #: When it was published to Discord
     podcast = models.ForeignKey(Podcast, on_delete=models.CASCADE)
+    objects: Manager
 
     @classmethod
     def make_id(cls, *, url_episode: str, date_published: datetime) -> str:
