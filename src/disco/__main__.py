@@ -84,11 +84,12 @@ async def _publish_episodes(episodes: list[Episode], channel: "GuildChannel") ->
         embed = discord.Embed(
             title=episode.title,
             url=episode.url_episode,
-            description=textwrap.shorten(episode.summary or episode.subtitle, 240),
+            description=textwrap.shorten(episode.subtitle or episode.summary, 240),
             timestamp=episode.date_published,
         )
         embed.set_image(url=episode.url_artwork)
-        await channel.send(embed=embed)
+        message = await channel.send(f"📣 **{episode.podcast.name.replace("*", r"\*")}**", embed=embed)
+        logger.info(f"Sent message: {message}")
         await asyncio.to_thread(sync_update_episode, episode)
 
 
