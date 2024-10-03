@@ -55,7 +55,9 @@ async def synchronize_podcasts() -> None:
         guild = None
         for _guild in bot.guilds:
             guild = _guild if _guild.name == podcast.forward_guild else guild
-            channel = get(guild.channels, name=podcast.forward_channel)
+            if guild:
+                channel = get(guild.channels, name=podcast.forward_channel)
+                break
         if not guild:
             logger.warning(f"Guild {podcast.forward_channel} not found")
         if guild and not channel:
