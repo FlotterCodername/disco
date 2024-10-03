@@ -89,6 +89,10 @@ class Podcast(models.Model):
         configured = Configurations.podcasts.content["podcast"]
         for c in configured:
             podcast, created = cls.objects.get_or_create(id=cls.make_id(name=c["name"]), defaults=c)
+            for key, value in c.items():
+                if (old_value := getattr(podcast, key, None)) != value:
+                    setattr(podcast, key, value)
+                    logger.info(f"Updated podcast '{podcast.name}' {key}: {old_value} -> {value}")
             if created:
                 logger.info(f"Added new podcast '{podcast.name}'")
             podcast.save()
