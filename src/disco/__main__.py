@@ -71,6 +71,7 @@ async def _publish_episodes(podcast: Podcast, episodes: list[Episode], channel: 
     """
     McCabe complexity reduction for the `synchronize_podcasts` task.
 
+    :param podcast: Podcast with the episodes
     :param episodes: The episodes to publish
     :param channel: The channel to publish to
     """
