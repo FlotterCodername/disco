@@ -64,10 +64,10 @@ async def synchronize_podcasts() -> None:
             logger.warning(f"Channel {podcast.forward_channel} not found in guild {guild}")
         if channel:
             logger.info(f"Channel ID for {podcast.forward_channel}: {channel.id}")
-            await _publish_episodes(episodes, channel)
+            await _publish_episodes(podcast, episodes, channel)
 
 
-async def _publish_episodes(episodes: list[Episode], channel: "GuildChannel") -> None:
+async def _publish_episodes(podcast: Podcast, episodes: list[Episode], channel: "GuildChannel") -> None:
     """
     McCabe complexity reduction for the `synchronize_podcasts` task.
 
@@ -88,7 +88,7 @@ async def _publish_episodes(episodes: list[Episode], channel: "GuildChannel") ->
             timestamp=episode.date_published,
         )
         embed.set_image(url=episode.url_artwork)
-        message = await channel.send(f"📣 **{episode.podcast.name.replace("*", r"\*")}**", embed=embed)
+        message = await channel.send(f"📣 **{podcast.name.replace("*", r"\*")}**", embed=embed)
         logger.info(f"Sent message: {message}")
         await asyncio.to_thread(sync_update_episode, episode)
 
