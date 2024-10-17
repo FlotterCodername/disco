@@ -2,7 +2,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -25,7 +25,7 @@ repos:
         args: [ --autofix, --no-ensure-ascii ]
 
   - repo: https://github.com/henryiii/validate-pyproject-schema-store
-    rev: 2024.09.23
+    rev: 2024.10.14
     hooks:
       - id: validate-pyproject
         additional_dependencies: [ "validate-pyproject[all]", "validate-pyproject-schema-store" ]

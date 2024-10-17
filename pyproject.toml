@@ -10,6 +10,7 @@ version = "0.1.0.dev"
 description = ""
 authors = ["Fabian H. Schneider <discord-automation.primarily965@simplelogin.com>"]
 readme = "README.md"
+documentation = "https://disco-automate.readthedocs.io/"
 packages = [{ include = "disco", from = "src" }, ]
 include = ["res/*"]
 
