@@ -1,6 +1,11 @@
 disco package
 =============
 
+.. automodule:: disco
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -65,14 +70,6 @@ disco.tryouts module
 --------------------
 
 .. automodule:: disco.tryouts
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: disco
    :members:
    :undoc-members:
    :show-inheritance:
