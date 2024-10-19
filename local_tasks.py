@@ -33,8 +33,6 @@ def apidoc() -> int:
     :return: exit code
     """
     command: list[str | Path] = [
-        "poetry",
-        "run",
         "sphinx-apidoc",
         REPO_ROOT / "src",
         "--output-dir",
@@ -45,7 +43,11 @@ def apidoc() -> int:
         "--no-toc",
         "--remove-old",
     ]
-    return subprocess.run(command, cwd=REPO_ROOT).returncode
+    try:
+        return subprocess.run(command, cwd=REPO_ROOT).returncode
+    except FileNotFoundError:
+        print("The command sphinx-apidoc is unavailable. Skipping this task silently.", file=sys.stderr)
+        return 0
 
 
 if __name__ == "__main__":
