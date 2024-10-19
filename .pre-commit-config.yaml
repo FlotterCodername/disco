@@ -82,4 +82,4 @@ repos:
         name: Local tasks
         entry: python ./local_tasks.py
         language: system
-        stages: [ commit ]
+        stages: [ pre-commit ]
