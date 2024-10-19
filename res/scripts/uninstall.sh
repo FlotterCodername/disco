@@ -30,9 +30,7 @@ if ! systemctl is-active --quiet docker; then
 fi
 
 echo "Stopping and removing the Docker service: $SERVICE_NAME"
-docker service rm "$SERVICE_NAME"
-
-if [ $? -eq 0 ]; then
+if docker service rm "$SERVICE_NAME"; then
   echo "Docker service $SERVICE_NAME removed successfully."
 else
   echo "Failed to remove Docker service $SERVICE_NAME. It might not exist."

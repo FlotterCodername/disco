@@ -40,24 +40,26 @@ fi
 
 echo "Creating Docker service: $SERVICE_NAME from image: $IMAGE_NAME"
 if [ -z "$PORT_MAPPING" ]; then
-        docker service create --name "$SERVICE_NAME" \
-                --mount type=volume,destination="$VOLUME_PATH" \
-                --replicas "$REPLICAS" \
-                "$IMAGE_NAME"
+  if docker service create --name "$SERVICE_NAME" \
+          --mount type=volume,destination="$VOLUME_PATH" \
+          --replicas "$REPLICAS" \
+          "$IMAGE_NAME"; then
+    echo "Docker service $SERVICE_NAME created successfully."
+  else
+    echo "Failed to create Docker service $SERVICE_NAME."
+    exit 1
+  fi
 else
-docker service create --name "$SERVICE_NAME" \
+  if docker service create --name "$SERVICE_NAME" \
         --mount type=volume,destination="$VOLUME_PATH" \
         --replicas "$REPLICAS" \
         -p "$PORT_MAPPING" \
-        "$IMAGE_NAME"
-fi
-
-
-if [ $? -eq 0 ]; then
-  echo "Docker service $SERVICE_NAME created successfully."
-else
-  echo "Failed to create Docker service $SERVICE_NAME."
-  exit 1
+        "$IMAGE_NAME"; then
+    echo "Docker service $SERVICE_NAME created successfully."
+  else
+    echo "Failed to create Docker service $SERVICE_NAME."
+    exit 1
+  fi
 fi
 
 exit 0
