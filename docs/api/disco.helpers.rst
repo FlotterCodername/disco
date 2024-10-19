@@ -1,6 +1,11 @@
 disco.helpers package
 =====================
 
+.. automodule:: disco.helpers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -16,14 +21,6 @@ disco.helpers.database module
 -----------------------------
 
 .. automodule:: disco.helpers.database
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: disco.helpers
    :members:
    :undoc-members:
    :show-inheritance:
