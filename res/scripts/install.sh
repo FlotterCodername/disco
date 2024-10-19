@@ -1,24 +1,29 @@
 #!/bin/bash
 
 usage() {
-  echo "Usage: $0 -s <service_name> -i <image_name> -p <host_port>:<container_port> -r <replicas> [-e ENV_VAR=value]..."
+  echo "Usage: $0 -s <service_name> -i <image_name> -v <volume_path> -p (optional) <host_port>:<container_port> -r (optional) <replicas>"
   exit 1
 }
 
 
 # Parse command line arguments
-while getopts "s:i:p:r:e:" opt; do
+while getopts "s:i:v:p:r:" opt; do
   case $opt in
     s) SERVICE_NAME=$OPTARG ;;
     i) IMAGE_NAME=$OPTARG ;;
+    v) VOLUME_PATH=$OPTARG ;;
     p) PORT_MAPPING=$OPTARG ;;
     r) REPLICAS=$OPTARG ;;
     *) usage ;;
   esac
 done
 
-if [ -z "$SERVICE_NAME" ] || [ -z "$IMAGE_NAME" ] || [ -z "$PORT_MAPPING" ] || [ -z "$REPLICAS" ]; then
+if [ -z "$SERVICE_NAME" ] || [ -z "$IMAGE_NAME" ] || [ -z "$VOLUME_PATH" ]; then
   usage
+fi
+
+if [ -z "$REPLICAS" ]; then
+  REPLICAS=1
 fi
 
 # Check if Docker is running
@@ -32,11 +37,21 @@ if ! docker info | grep -q "Swarm: active"; then
   docker swarm init
 fi
 
+
 echo "Creating Docker service: $SERVICE_NAME from image: $IMAGE_NAME"
+if [ -z "$PORT_MAPPING" ]; then
+        docker service create --name "$SERVICE_NAME" \
+                --mount type=volume,destination="$VOLUME_PATH" \
+                --replicas "$REPLICAS" \
+                "$IMAGE_NAME"
+else
 docker service create --name "$SERVICE_NAME" \
-  -p "$PORT_MAPPING" \
-  --replicas "$REPLICAS" \
-  "$IMAGE_NAME"
+        --mount type=volume,destination="$VOLUME_PATH" \
+        --replicas "$REPLICAS" \
+        -p "$PORT_MAPPING" \
+        "$IMAGE_NAME"
+fi
+
 
 if [ $? -eq 0 ]; then
   echo "Docker service $SERVICE_NAME created successfully."
