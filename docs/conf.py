@@ -12,10 +12,7 @@ import datetime
 import logging
 import pathlib
 import re
-import sys
 import tomllib
-
-sys.path.append(str(pathlib.Path(__file__).parent.parent / "src"))
 
 __pyproject = tomllib.load((pathlib.Path(__file__).parent.parent / "pyproject.toml").resolve().open("rb"))
 __definitions = __pyproject.get("tool", {}).get("definitions", {})
