@@ -31,6 +31,8 @@ class Configuration:
     @property
     def content(self) -> dict:
         """Load the configuration from the filesystem with validation."""
+        if not self.exists:
+            return {}
         loaded = tomllib.load(self.path.open("rb"))
         jsonschema.validate(loaded, self.schema)
         return loaded

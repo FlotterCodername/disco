@@ -86,7 +86,7 @@ class Podcast(models.Model):
     @classmethod
     def load_from_configuration(cls) -> None:
         """Load all podcasts from the configuration into the DB"""
-        configured = Configurations.podcasts.content["podcast"]
+        configured = Configurations.podcasts.content.get("podcast", [])
         for c in configured:
             podcast, created = cls.objects.get_or_create(id=cls.make_id(name=c["name"]), defaults=c)
             for key, value in c.items():
