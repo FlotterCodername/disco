@@ -44,13 +44,14 @@ repos:
     hooks:
       - id: poetry-export
         additional_dependencies: [ "poetry-plugin-export" ]
-        args: ["--output=docs/requirements.txt", "--without-hashes", "--with", "dev"]
+        args: [ "--output=docs/requirements.txt", "--without-hashes", "--with", "dev" ]
         language_version: python3.12
 
   - repo: https://github.com/jshwi/docsig
     rev: v0.64.0
     hooks:
       - id: docsig
+        args: [ "--check-class-constructor", "--check-dunders", "--check-protected" ]
         language_version: python3.12
 
   - repo: https://github.com/dosisod/refurb
