@@ -1,5 +1,5 @@
 [tool.definitions]
-name-pretty = "Disco!"
+name-pretty = "Disco"
 sphinx-extensions = ["myst_parser", "sphinx.ext.autodoc"]
 sphinx-html-theme = "sphinx_book_theme"
 myst-enable-extensions = ["colon_fence"]

@@ -1,4 +1,4 @@
-# Disco!
+# Disco
 
 [![License](https://img.shields.io/github/license/FlotterCodername/disco)](https://github.com/FlotterCodername/disco/blob/main/LICENSE.txt)
 [![Python Version](https://img.shields.io/badge/python-3.12-blue)](https://www.python.org/downloads/)
@@ -50,5 +50,5 @@ docker run --volume /opt/disco/:/opt/disco/ ghcr.io/flottercodername/disco
 ```
 
 The app should be able to start up, create the database and log file, and connect to Discord. But it will not do
-anything useful yet. For that, please refer to the [documentation](
+anything useful yet. For that, please refer to the Disco User Guide within the [documentation](
 https://disco-automate.readthedocs.io/en/latest/).
