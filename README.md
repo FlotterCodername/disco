@@ -23,15 +23,16 @@ docker pull ghcr.io/flottercodername/disco
 Prepare a host directory for the container to store its data, e.g. at `/opt/disco/`:
 
 ```
-opt/
-  disco/
-    log/
-      disco.log  # Automatically created
-    run/
-      secrets.toml
-      # ... more config files here
-    sqlite/
-      db.sqlite3  # Automatically created
+/
+  opt/
+    disco/
+      log/
+        disco.log  # Automatically created
+      run/
+        secrets.toml
+        # ... more config files here
+      sqlite/
+        db.sqlite3  # Automatically created
 ```
 
 In this directory, the only thing you need to provide ahead of time is the *Bot Token* from your *Discord App*. You can
