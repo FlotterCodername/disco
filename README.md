@@ -12,7 +12,7 @@
 
 Discord automation stuff
 
-## How to set it up?
+## How to get started?
 
 Pull the docker image from the GitHub Container Registry:
 
@@ -29,16 +29,18 @@ opt/
       disco.log  # Automatically created
     run/
       secrets.toml
+      # ... more config files here
     sqlite/
       db.sqlite3  # Automatically created
 ```
 
-In this directory, the only thing you need to provide ahead of time is your *Discord App secret*. Store this in
-`secrets.toml`:
+In this directory, the only thing you need to provide ahead of time is the *Bot Token* from your *Discord App*. You can
+create a Discord App and get the token from the [Discord Developer Portal](https://discord.com/developers/applications),
+if you do not have one already. Store this in `secrets.toml`:
 
 ```toml
 [disco]
-token = "YOUR_TOKEN_HERE"
+token = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.A1b2C3.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKL"
 ```
 
 Run the container while mounting the host directory at `/opt/disco/`:
@@ -46,3 +48,7 @@ Run the container while mounting the host directory at `/opt/disco/`:
 ```bash
 docker run --volume /opt/disco/:/opt/disco/ ghcr.io/flottercodername/disco
 ```
+
+The app should be able to start up, create the database and log file, and connect to Discord. But it will not do
+anything useful yet. For that, please refer to the [documentation](
+https://disco-automate.readthedocs.io/en/latest/).
