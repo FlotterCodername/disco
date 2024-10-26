@@ -10,8 +10,9 @@ import json
 import pathlib
 import sys
 
-__all__ = ["podcasts", "secrets"]
+from disco.helpers.sorting import deep_sort
 
+__all__ = ["podcasts", "secrets"]
 
 true, false, null = True, False, None
 
@@ -20,42 +21,44 @@ _base_uri = "https://raw.githubusercontent.com/FlotterCodername/disco/refs/heads
 podcasts = {
     "$id": f"{_base_uri}/podcasts.schema.v1.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
     "properties": {
-        "$schema": {"type": "string", "format": "uri"},
+        "$schema": {"format": "uri", "type": "string"},
         "podcast": {
-            "type": "array",
             "items": {
-                "type": "object",
+                "additionalProperties": false,
                 "properties": {
-                    "name": {"type": "string"},
-                    "forward_guild": {"type": "string"},
                     "forward_channel": {"type": "string"},
-                    "url_feed": {"type": "string", "format": "uri"},
-                    "url_artwork": {"type": "string", "format": "uri"},
+                    "forward_guild": {"type": "string"},
+                    "name": {"type": "string"},
+                    "url_artwork": {"format": "uri", "type": "string"},
+                    "url_feed": {"format": "uri", "type": "string"},
                 },
                 "required": ["name", "forward_guild", "forward_channel", "url_feed"],
-                "additionalProperties": false,
+                "type": "object",
             },
+            "type": "array",
         },
     },
+    "type": "object",
 }
+
 secrets = {
     "$id": f"{_base_uri}/secrets.schema.v1.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
+    "additionalProperties": false,
     "properties": {
-        "$schema": {"type": "string", "format": "uri"},
+        "$schema": {"format": "uri", "type": "string"},
         "disco": {
-            "type": "object",
+            "additionalProperties": false,
             "properties": {"token": {"type": "string"}},
             "required": ["token"],
-            "additionalProperties": false,
+            "type": "object",
         },
     },
     "required": ["disco"],
-    "additionalProperties": false,
+    "type": "object",
 }
+
 
 _module_locals = locals()
 _res_dir = pathlib.Path(__file__).parent.parent.parent / "res" / "schemas"
@@ -72,7 +75,7 @@ def _dump() -> int:
     for schema in schemas:
         target = _res_dir / schema["$id"].removeprefix(f"{_base_uri}/")
         old_text = target.read_text() if target.is_file() else ""
-        new_text = json.dumps(schema, indent=2) + "\n"
+        new_text = json.dumps(deep_sort(schema), indent=2) + "\n"
         if old_text != new_text:
             changed = 1
             target.write_text(new_text)

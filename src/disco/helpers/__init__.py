@@ -9,12 +9,8 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 import logging
 from logging import StreamHandler, handlers
 
-import tomli_w
-
 from disco import __product__
-from disco.configuration import Configurations
-from disco.helpers.atomicwrites import atomic_write
-from disco.paths import DISCO_LOG, SECRETS_TOML
+from disco.paths import DISCO_LOG
 
 
 def get_log_handler(suffix: str) -> handlers.RotatingFileHandler:
@@ -39,25 +35,3 @@ logger = logging.getLogger(__product__)
 logger.setLevel(10)
 logger.addHandler(get_log_handler("app"))
 logger.addHandler(StreamHandler())
-
-
-def get_discord_bot_token(scrub_token: bool = False) -> str:
-    """
-    Get the Discord bot token from the secrets file or keyring,
-    and scrub it from the secrets file atomically using atomicwrites.
-
-    :param scrub_token: Whether to scrub the token from the secrets file (currently not compatible with Docker build)
-    :return: The Discord bot token
-    """
-    try:
-        if not Configurations.secrets.exists:
-            raise RuntimeError(f"Missing configuration file at {Configurations.secrets.path}")
-        loaded = Configurations.secrets.content
-        token = loaded["disco"]["token"]
-        if scrub_token:
-            loaded["disco"]["token"] = None
-            with atomic_write(SECRETS_TOML, mode="w", overwrite=True) as f:
-                tomli_w.dump(loaded, f)
-        return token
-    except Exception as e:
-        raise RuntimeError(f"Failed to obtain token:\n{e}")
