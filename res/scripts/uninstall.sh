@@ -2,7 +2,7 @@
 
 # Function to display usage instructions
 usage() {
-  echo "Usage: $0 -s <service_name> [-c]"
+  echo "Usage: $0 -s SERVICE_NAME [-c]"
   echo "  -s: Name of the Docker service to remove"
   echo "  -c: Optional flag to clean up unused containers, images, volumes, and networks"
   exit 1
