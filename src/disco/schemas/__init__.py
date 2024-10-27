@@ -14,6 +14,8 @@ from disco.helpers.sorting import deep_sort
 
 __all__ = ["podcasts", "secrets"]
 
+from disco.schemas.docgen import dump_markdown_docs
+
 true, false, null = True, False, None
 
 _base_uri = "https://raw.githubusercontent.com/FlotterCodername/disco/refs/heads/main/res/schemas"
@@ -61,7 +63,7 @@ secrets = {
 
 
 _module_locals = locals()
-_res_dir = pathlib.Path(__file__).parent.parent.parent / "res" / "schemas"
+_res_dir = pathlib.Path(__file__).parent.parent.parent.parent / "res" / "schemas"
 
 
 def _dump() -> int:
@@ -73,9 +75,17 @@ def _dump() -> int:
     changed = 0
     schemas = [_module_locals[name] for name in __all__ if not name.startswith("_")]
     for schema in schemas:
+        # Schema
         target = _res_dir / schema["$id"].removeprefix(f"{_base_uri}/")
         old_text = target.read_text() if target.is_file() else ""
         new_text = json.dumps(deep_sort(schema), indent=2) + "\n"
+        if old_text != new_text:
+            changed = 1
+            target.write_text(new_text)
+        # Markdown
+        target = target.with_suffix(".md")
+        old_text = target.read_text() if target.is_file() else ""
+        new_text = dump_markdown_docs(schema)
         if old_text != new_text:
             changed = 1
             target.write_text(new_text)
