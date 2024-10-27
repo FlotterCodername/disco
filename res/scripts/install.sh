@@ -22,10 +22,10 @@ ExecStop=/usr/bin/docker stop disco-container
 [Install]
 WantedBy=multi-user.target
 EOF
-  
+
   # Reload systemd to apply the new service
   sudo systemctl daemon-reload
-  
+
   # Enable and start the service
   sudo systemctl enable disco.service
   sudo systemctl start disco.service

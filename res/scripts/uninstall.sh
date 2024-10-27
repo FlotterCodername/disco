@@ -9,7 +9,7 @@ remove_docker_service() {
 
   sudo systemctl stop disco.service
   sudo systemctl disable disco.service
-  sudo rm /etc/systemd/system/disco.service 
+  sudo rm /etc/systemd/system/disco.service
   sudo systemctl daemon-reload
 
   echo "Cleaning up unused Docker resources..."
