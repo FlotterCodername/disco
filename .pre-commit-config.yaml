@@ -37,17 +37,21 @@ repos:
       - id: poetry-check
       # - id: poetry-lock  # Broken in pre-commit.ci
       - id: poetry-install
+        language_version: python3.12
 
   - repo: https://github.com/python-poetry/poetry-plugin-export
     rev: "1.8.0"
     hooks:
       - id: poetry-export
-        args: ["--output=docs/requirements.txt", "--without-hashes", "--with", "dev"]
+        additional_dependencies: [ "poetry-plugin-export" ]
+        args: [ "--output=docs/requirements.txt", "--without-hashes", "--with", "dev" ]
+        language_version: python3.12
 
   - repo: https://github.com/jshwi/docsig
     rev: v0.64.0
     hooks:
       - id: docsig
+        args: [ "--check-class-constructor", "--check-dunders", "--check-protected" ]
         language_version: python3.12
 
   - repo: https://github.com/dosisod/refurb

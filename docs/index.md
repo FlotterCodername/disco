@@ -7,7 +7,16 @@
 ```
 
 ```{toctree}
-:caption: 'Contents:'
+:caption: 'User guide'
+:hidden:
+:maxdepth: 2
+
+/user/config
+```
+
+```{toctree}
+:caption: 'Python API'
+:hidden:
 :maxdepth: 2
 
 /api/disco

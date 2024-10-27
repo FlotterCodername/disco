@@ -17,7 +17,7 @@ from django.db import models
 from django.db.models import Manager
 from feedparser import FeedParserDict
 
-from disco.configuration import Configurations
+from disco.configuration import Configuration
 from disco.helpers import logger
 
 CHAR_FIELD_MAX_LENGTH = 10 ^ 9  # Not enforced by SQLite
@@ -86,7 +86,7 @@ class Podcast(models.Model):
     @classmethod
     def load_from_configuration(cls) -> None:
         """Load all podcasts from the configuration into the DB"""
-        configured = Configurations.podcasts.content["podcast"]
+        configured = Configuration.podcasts.content.get("podcast", [])
         for c in configured:
             podcast, created = cls.objects.get_or_create(id=cls.make_id(name=c["name"]), defaults=c)
             for key, value in c.items():

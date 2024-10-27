@@ -1,0 +1,12 @@
+"$schema" = "https://raw.githubusercontent.com/FlotterCodername/disco/refs/heads/main/res/schemas/podcasts.v1.schema.json"
+
+[[podcast]]
+forward_channel = "podcast"
+forward_guild = "My Server"
+name = "My Podcast"
+url_artwork = "https://example.com/podcast.jpg"
+url_feed = "https://example.com/podcast.rss"
+
+[[podcast]]
+"..." = "..."
+name = "My Other Podcast"
