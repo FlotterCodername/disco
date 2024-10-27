@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-  echo "Usage: $0 -s <service_name> -i <image_name> -v <volume_path> -p (optional) <host_port>:<container_port> -r (optional) <replicas>"
+  echo "Usage: $0 -s SERVICE_NAME -i IMAGE_NAME -v VOLUME_PATH [-p HOST_PORT:CONTAINER_PORT] [-r REPLICAS]"
   exit 1
 }
 
