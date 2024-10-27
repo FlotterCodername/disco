@@ -24,7 +24,7 @@ podcasts = {
     "$id": f"{_base_uri}/podcasts.schema.v1.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
-        "$schema": {"format": "uri", "type": "string"},
+        "$schema": {"description": "Which JSONSchema the file follows.", "format": "uri", "type": "string"},
         "podcast": {
             "items": {
                 "additionalProperties": false,
@@ -48,16 +48,19 @@ secrets = {
     "$id": f"{_base_uri}/secrets.schema.v1.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "additionalProperties": false,
+    "description": "This holds all the secrets required for your bot to function.",
     "properties": {
-        "$schema": {"format": "uri", "type": "string"},
+        "$schema": {"description": "Which JSONSchema the file follows.", "format": "uri", "type": "string"},
         "disco": {
             "additionalProperties": false,
-            "properties": {"token": {"type": "string"}},
+            "description": "This holds all the actual secrets data.",
+            "properties": {"token": {"description": "The 'Bot Token' from your Discord App.", "type": "string"}},
             "required": ["token"],
             "type": "object",
         },
     },
     "required": ["disco"],
+    "title": "secrets.toml",
     "type": "object",
 }
 
@@ -84,11 +87,11 @@ def _dump() -> int:
             target.write_text(new_text)
         # Markdown
         target = target.with_suffix(".md")
-        old_text = target.read_text() if target.is_file() else ""
+        old_text = target.read_text("utf-8") if target.is_file() else ""
         new_text = dump_markdown_docs(schema)
         if old_text != new_text:
             changed = 1
-            target.write_text(new_text)
+            target.write_text(new_text, "utf-8")
     return changed
 
 

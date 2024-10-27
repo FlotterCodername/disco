@@ -3,6 +3,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "properties": {
     "$schema": {
+      "description": "Which JSONSchema the file follows.",
       "format": "uri",
       "type": "string"
     },
