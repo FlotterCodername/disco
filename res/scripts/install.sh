@@ -1,34 +1,37 @@
 #!/bin/bash
 # Copyright © 2024 David Siegl
-#
 # This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 # If a copy of the MPL was not distributed with this file,
 # You can obtain one at https://mozilla.org/MPL/2.0/.
-usage() {
-  echo "Usage: $0 -s SERVICE_NAME -i IMAGE_NAME -v VOLUME_PATH [-p HOST_PORT:CONTAINER_PORT] [-r REPLICAS]"
-  exit 1
+
+
+create_docker_service() {
+
+  # Create the systemd service file for the Disco Docker container
+  sudo tee /etc/systemd/system/disco.service > /dev/null <<EOF
+[Unit]
+Description=Disco Docker Container Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run --rm --name disco-container --volume /opt/disco/:/opt/disco/ ghcr.io/flottercodername/disco
+ExecStop=/usr/bin/docker stop disco-container
+
+[Install]
+WantedBy=multi-user.target
+EOF
+  
+  # Reload systemd to apply the new service
+  sudo systemctl daemon-reload
+  
+  # Enable and start the service
+  sudo systemctl enable disco.service
+  sudo systemctl start disco.service
+
 }
 
-
-# Parse command line arguments
-while getopts "s:i:v:p:r:" opt; do
-  case $opt in
-    s) SERVICE_NAME=$OPTARG ;;
-    i) IMAGE_NAME=$OPTARG ;;
-    v) VOLUME_PATH=$OPTARG ;;
-    p) PORT_MAPPING=$OPTARG ;;
-    r) REPLICAS=$OPTARG ;;
-    *) usage ;;
-  esac
-done
-
-if [ -z "$SERVICE_NAME" ] || [ -z "$IMAGE_NAME" ] || [ -z "$VOLUME_PATH" ]; then
-  usage
-fi
-
-if [ -z "$REPLICAS" ]; then
-  REPLICAS=1
-fi
 
 # Check if Docker is running
 if ! systemctl is-active --quiet docker; then
@@ -36,34 +39,15 @@ if ! systemctl is-active --quiet docker; then
   exit 1
 fi
 
-if ! docker info | grep -q "Swarm: active"; then
-  echo "Initializing Docker Swarm..."
-  docker swarm init
-fi
+# Pull the latest Docker image
+sudo docker pull ghcr.io/flottercodername/disco
 
 
-echo "Creating Docker service: $SERVICE_NAME from image: $IMAGE_NAME"
-if [ -z "$PORT_MAPPING" ]; then
-  if docker service create --name "$SERVICE_NAME" \
-          --mount type=volume,destination="$VOLUME_PATH" \
-          --replicas "$REPLICAS" \
-          "$IMAGE_NAME"; then
-    echo "Docker service $SERVICE_NAME created successfully."
-  else
-    echo "Failed to create Docker service $SERVICE_NAME."
-    exit 1
-  fi
+if create_docker_service; then
+  echo "Disco Docker container service installed and started."
 else
-  if docker service create --name "$SERVICE_NAME" \
-        --mount type=volume,destination="$VOLUME_PATH" \
-        --replicas "$REPLICAS" \
-        -p "$PORT_MAPPING" \
-        "$IMAGE_NAME"; then
-    echo "Docker service $SERVICE_NAME created successfully."
-  else
-    echo "Failed to create Docker service $SERVICE_NAME."
-    exit 1
-  fi
+  echo "Failed to install Disco Docker container service."
+  exit 1
 fi
 
 exit 0
