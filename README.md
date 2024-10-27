@@ -51,5 +51,4 @@ docker run --volume /opt/disco/:/opt/disco/ ghcr.io/flottercodername/disco
 ```
 
 The app should be able to start up, create the database and log file, and connect to Discord. But it will not do
-anything useful yet. For that, please refer to the Disco User Guide within the [documentation](
-https://disco-automate.readthedocs.io/en/latest/).
+anything useful yet. For that, please refer to the [user guide](https://disco-automate.readthedocs.io/en/latest/user/).

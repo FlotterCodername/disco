@@ -9,6 +9,7 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import jsonschema
 import tomli_w
@@ -17,13 +18,17 @@ from disco.helpers.atomicwrites import atomic_write
 from disco.paths import PODCASTS_TOML, SECRETS_TOML
 from disco.schemas import podcasts, secrets
 
+if TYPE_CHECKING:
+    # noinspection PyProtectedMember
+    from disco.schemas import _DcSchema
+
 
 @dataclass
 class _DcConfiguration:
     """One of the configurations for the application."""
 
     path: Path  #: The path to the configuration file.
-    schema: dict  # The JSON schema for the configuration file.
+    schema: "_DcSchema"  # The JSON schema for the configuration file.
 
     @property
     def exists(self) -> bool:
@@ -36,7 +41,7 @@ class _DcConfiguration:
         if not self.exists:
             return {}
         loaded = tomllib.load(self.path.open("rb"))
-        jsonschema.validate(loaded, self.schema)
+        jsonschema.validate(loaded, self.schema.definition)
         return loaded
 
 

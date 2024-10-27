@@ -7,7 +7,7 @@
 ```
 
 ```{toctree}
-:caption: 'Disco User Guide'
+:caption: 'User guide'
 :hidden:
 :maxdepth: 2
 

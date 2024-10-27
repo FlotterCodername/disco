@@ -28,5 +28,9 @@ DISCO_SQLITE = DISCO_HOME / "sqlite"
 DISCO_SQLITE.mkdir(parents=True, exist_ok=True)
 DISCO_DB = DISCO_SQLITE / "db.sqlite3"
 
+# DEV ONLY
 # DJANGO
 MANAGE_PY = __repo_root__ / "manage.py"
+# RESOURCES
+RES = __repo_root__ / "res"
+RES_SCHEMAS = RES / "schemas"
