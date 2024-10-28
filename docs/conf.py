@@ -19,7 +19,7 @@ __definitions = __pyproject.get("tool", {}).get("definitions", {})
 __poetry = __pyproject.get("tool", {}).get("poetry", {})
 __author_re = re.compile(r"(.+?) (<(.*?)>)")
 __authors = [__author_re.match(i).group(1).strip() for i in __poetry.get("authors", [])]
-__author_str = f"{", ".join(__authors[:-1])} and {__authors[-1]}".removeprefix(" and ")
+__author_str = f"{', '.join(__authors[:-1])} and {__authors[-1]}".removeprefix(" and ")
 
 # Configuration file for the Sphinx documentation builder.
 #
