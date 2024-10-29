@@ -109,7 +109,9 @@ async def on_message(message) -> None:
     # Check if the message is a DM and that it is not from the bot itself
     if message.guild is None and message.author != bot.user:
         # Send an automatic reply
-        await message.channel.send("Ich bin ein Bot. Meine Inbox wird daher nicht überwacht. Mehr Antworten bekommst du von mir nicht.")
+        await message.channel.send(
+            "Ich bin ein Bot. Meine Inbox wird daher nicht überwacht. Mehr Antworten bekommst du von mir nicht."
+        )
 
     await bot.process_commands(message)
 
