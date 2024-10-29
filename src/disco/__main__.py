@@ -105,6 +105,7 @@ async def on_ready() -> None:  # noqa RUF029
 
 @bot.event
 async def on_message(message) -> None:
+    """Auto response in case of retrieving a DM."""
     # Check if the message is a DM and that it is not from the bot itself
     if message.guild is None and message.author != bot.user:
         # Send an automatic reply
