@@ -30,6 +30,7 @@ if TYPE_CHECKING:
 # Discord bot setup
 intents = discord.Intents.default()
 intents.message_content = True
+intents.dm_messages = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 
@@ -100,6 +101,16 @@ async def on_ready() -> None:  # noqa RUF029
     """Logged in to Discord, let's log this very important event."""
     logger.info(f"Logged in as {bot.user}")
     synchronize_podcasts.start()
+
+
+@bot.event
+async def on_message(message) -> None:
+    # Check if the message is a DM and that it is not from the bot itself
+    if message.guild is None and message.author != bot.user:
+        # Send an automatic reply
+        await message.channel.send("Ich bin ein Bot. Meine Inbox wird daher nicht überwacht. Mehr Antworten bekommst du von mir nicht.")
+
+    await bot.process_commands(message)
 
 
 def main() -> int:
