@@ -1,0 +1,33 @@
+{
+  "$id": "https://raw.githubusercontent.com/FlotterCodername/disco/refs/heads/main/res/schemas/bot.v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "This configuration stores everything related to the bot itself.",
+  "properties": {
+    "$schema": {
+      "description": "Which JSONSchema the file follows.",
+      "format": "uri",
+      "type": "string"
+    },
+    "no-reply": {
+      "additionalProperties": false,
+      "description": "Configuration for the 'no-reply' feature.",
+      "properties": {
+        "enabled": {
+          "description": "Whether the 'no-reply' feature is enabled.",
+          "type": "boolean"
+        },
+        "message": {
+          "description": "The message to send back when the bot receives a message. If empty or not set, a default message in English will be sent.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "Bot",
+  "type": "object"
+}

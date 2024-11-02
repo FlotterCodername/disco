@@ -1,0 +1,5 @@
+"$schema" = "https://raw.githubusercontent.com/FlotterCodername/disco/refs/heads/main/res/schemas/bot.v1.schema.json"
+
+[no-reply]
+enabled = true
+message = "⚠️ I am a bot. My inbox is not monitored."
