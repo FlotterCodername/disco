@@ -43,7 +43,7 @@ class JsonSchemaMarkdownGenerator:
             sections.extend((schema["description"], ""))
         # Process the root schema
         sections.extend(
-            (f"{"#" * self.current_heading_level} {schema["title"]} top level", *self._process_schema(schema)),
+            (f"{'#' * self.current_heading_level} {schema['title']} top level", *self._process_schema(schema)),
         )
         return "\n".join(i.rstrip() for i in sections).rstrip() + "\n"
 
@@ -91,7 +91,7 @@ class JsonSchemaMarkdownGenerator:
 
         if name:
             sections.extend((
-                f"{"#" * self.current_heading_level} `{name}` {self.rq(required)}",
+                f"{'#' * self.current_heading_level} `{name}` {self.rq(required)}",
                 "",
             ))
 
@@ -108,7 +108,7 @@ class JsonSchemaMarkdownGenerator:
                 type_str = self._get_type_string(prop_schema)
                 desc = prop_schema.get("description", "").replace("\n", " ")
 
-                sections.append(f"| {prop_name} | {type_str} | {"Yes" if is_required else ""} | {desc} |")
+                sections.append(f"| {prop_name} | {type_str} | {'Yes' if is_required else ''} | {desc} |")
 
                 # If the property is an object or array with complex structure, add detailed documentation
                 if prop_schema.get("type") in ("object", "array") or any(
@@ -136,7 +136,7 @@ class JsonSchemaMarkdownGenerator:
 
         if name:
             sections.extend((
-                f"{"#" * self.current_heading_level} `{name}[]` {self.rq(required)}",
+                f"{'#' * self.current_heading_level} `{name}[]` {self.rq(required)}",
                 "",
             ))
 
@@ -182,7 +182,7 @@ class JsonSchemaMarkdownGenerator:
         if not name:
             name = "???"
         sections.extend((
-            f"{"#" * self.current_heading_level} `[{name}]` ({title_suffix}) {self.rq(required)}",
+            f"{'#' * self.current_heading_level} `[{name}]` ({title_suffix}) {self.rq(required)}",
             "",
             description,
             "",
@@ -206,7 +206,7 @@ class JsonSchemaMarkdownGenerator:
         sections: list[str] = []
 
         if name:
-            sections.extend((f"{"#" * self.current_heading_level} {name} {self.rq(required)}", ""))
+            sections.extend((f"{'#' * self.current_heading_level} {name} {self.rq(required)}", ""))
 
         type_str = self._get_type_string(schema)
         sections.append(f"Type: {type_str}")
@@ -220,7 +220,7 @@ class JsonSchemaMarkdownGenerator:
                 sections.append(f"- `{value}`")
 
         if "default" in schema:
-            sections.extend(("", f"Default: `{schema["default"]}`"))
+            sections.extend(("", f"Default: `{schema['default']}`"))
 
         return sections
 
@@ -242,7 +242,7 @@ class JsonSchemaMarkdownGenerator:
             return "array"
 
         if type_str == "string" and "format" in schema:
-            return f"string ({schema["format"]})"
+            return f"string ({schema['format']})"
 
         return type_str
 

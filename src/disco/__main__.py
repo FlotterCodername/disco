@@ -90,7 +90,7 @@ async def _publish_episodes(podcast: Podcast, episodes: list[Episode], channel: 
             timestamp=episode.date_published,
         )
         embed.set_image(url=episode.url_artwork)
-        message = await channel.send(f"📣 **{podcast.name.replace("*", r"\*")}**", embed=embed)
+        message = await channel.send(f"📣 **{podcast.name.replace('*', r'\*')}**", embed=embed)
         logger.info(f"Sent message: {message}")
         await asyncio.to_thread(sync_update_episode, episode)
 
