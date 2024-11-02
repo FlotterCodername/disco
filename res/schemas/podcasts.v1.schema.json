@@ -1,0 +1,52 @@
+{
+  "$id": "https://raw.githubusercontent.com/FlotterCodername/disco/refs/heads/main/res/schemas/podcasts.v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This configuration stores everything related to podcast feeds.",
+  "properties": {
+    "$schema": {
+      "description": "Which JSONSchema the file follows.",
+      "format": "uri",
+      "type": "string"
+    },
+    "podcast": {
+      "description": "Podcast feeds to forward to a Discord channel.",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "forward_channel": {
+            "description": "The exact name of the channel where podcast episodes shall appear.",
+            "type": "string"
+          },
+          "forward_guild": {
+            "description": "The exact name of the Discord server ('guild') where `forward_channel` is located.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Your chosen name of the podcast (must be unique). May appear in user-facing text.",
+            "type": "string"
+          },
+          "url_artwork": {
+            "description": "The URL for the podcast cover art. This is also be used as a fallback whenever episode artwork is not available.",
+            "format": "uri",
+            "type": "string"
+          },
+          "url_feed": {
+            "description": "The URL for the podcast RSS feed.",
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "forward_guild",
+          "forward_channel",
+          "url_feed"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "title": "Podcasts",
+  "type": "object"
+}

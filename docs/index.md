@@ -3,15 +3,21 @@
 % You can adapt this file completely to your liking, but it should at least
 % contain the root `toctree` directive.
 
-# Disco! documentation
-
-Add your content using `MyST - Markedly Structured Text` syntax. See the
-[MyST](https://myst-parser.readthedocs.io/en/latest/)
-documentation for details.
+```{include} ../README.md
+```
 
 ```{toctree}
-:caption: 'Contents:'
+:caption: 'User guide'
+:hidden:
 :maxdepth: 2
 
-/api/modules
+/user/config
+```
+
+```{toctree}
+:caption: 'Python API'
+:hidden:
+:maxdepth: 2
+
+/api/disco
 ```

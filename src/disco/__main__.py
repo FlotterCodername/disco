@@ -17,8 +17,9 @@ import discord
 from discord.ext import commands, tasks
 from discord.utils import get
 
+from disco.configuration import Configuration
 from disco.definitions import EV
-from disco.helpers import get_discord_bot_token, get_log_handler, logger
+from disco.helpers import get_log_handler, logger
 from disco.helpers.database import bootstrap
 from disco.models import Episode, Podcast
 
@@ -109,7 +110,7 @@ def main() -> int:
     """
     try:
         bootstrap()
-        bot.run(token=get_discord_bot_token(), log_handler=get_log_handler("bot"))
+        bot.run(token=Configuration.get_discord_bot_token(), log_handler=get_log_handler("bot"))
     except Exception as e:
         if os.getenv(EV.DISCO_IS_DEBUG):
             print(f"An error occurred:\n{e}", file=sys.stderr)
