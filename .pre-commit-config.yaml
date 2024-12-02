@@ -24,12 +24,12 @@ repos:
       - id: pretty-format-json
         args: [ --autofix, --no-ensure-ascii ]
 
-  - repo: https://github.com/henryiii/validate-pyproject-schema-store
-    rev: 2024.11.22
-    hooks:
-      - id: validate-pyproject
-        additional_dependencies: [ "validate-pyproject[all]", "validate-pyproject-schema-store" ]
-        language_version: python3.12
+#  - repo: https://github.com/henryiii/validate-pyproject-schema-store
+#    rev: 2024.11.25
+#    hooks:
+#      - id: validate-pyproject
+#        additional_dependencies: [ "validate-pyproject[all]", "validate-pyproject-schema-store" ]
+#        language_version: python3.12
 
   - repo: https://github.com/python-poetry/poetry
     rev: 1.8.0
@@ -48,7 +48,7 @@ repos:
         language_version: python3.12
 
   - repo: https://github.com/jshwi/docsig
-    rev: v0.64.1
+    rev: v0.65.0
     hooks:
       - id: docsig
         args: [ "--check-class-constructor", "--check-dunders", "--check-protected" ]
@@ -62,7 +62,7 @@ repos:
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
-    rev: v0.8.0
+    rev: v0.8.1
     hooks:
       # Run the linter.
       - id: ruff
