@@ -39,16 +39,16 @@ async def synchronize_podcasts() -> None:
     logger.info("Synchronizing podcasts...")
 
     def sync_get_podcasts() -> list[Podcast]:
-        _podcasts: list[Podcast] = Podcast.objects.all()
-        for _podcast in _podcasts:
+        podcasts_: list[Podcast] = Podcast.objects.all()
+        for _podcast in podcasts_:
             logger.info(f"Syncing podcast: {_podcast.name}")
             _podcast.update()
-        return _podcasts
+        return podcasts_
 
     podcasts = await asyncio.to_thread(sync_get_podcasts)
 
-    def sync_get_episodes(_podcast: Podcast) -> list[Episode]:
-        return [*Episode.objects.filter(date_forwarded=None, podcast=_podcast).order_by("date_published")]
+    def sync_get_episodes(podcast_: Podcast) -> list[Episode]:
+        return [*Episode.objects.filter(date_forwarded=None, podcast=podcast_).order_by("date_published")]
 
     for podcast in podcasts:
         episodes: list[Episode] = await asyncio.to_thread(sync_get_episodes, podcast)
@@ -77,9 +77,9 @@ async def _publish_episodes(podcast: Podcast, episodes: list[Episode], channel: 
     :param channel: The channel to publish to
     """
 
-    def sync_update_episode(_episode: Episode) -> None:
-        _episode.date_forwarded = datetime.now(tz=UTC)
-        _episode.save()
+    def sync_update_episode(episode_: Episode) -> None:
+        episode_.date_forwarded = datetime.now(tz=UTC)
+        episode_.save()
 
     for episode in episodes:
         logger.info(f"Publishing episode from {episode.date_published}: '{episode.title}'")
