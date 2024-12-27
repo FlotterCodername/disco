@@ -7,7 +7,7 @@ As described on the landing page, the `/opt/disco/` directory should be a volume
 so that you can manage the configuration files on the host system. This also makes it so that logs and databases are
 persistent.
 
-## Secrets
+## Secrets (required)
 Location of the file: `/opt/disco/run/secrets.toml`
 
 ### Secrets schema documentation
@@ -21,7 +21,21 @@ language: toml
 ---
 ```
 
-## Podcasts
+## Bot (optional)
+Location of the file: `/opt/disco/run/bot.toml`
+
+### Bot schema documentation
+```{include} ../../res/schemas/bot.v1.md
+```
+
+### Bot example
+```{literalinclude} ../../res/schemas/bot.v1.example.toml
+---
+language: toml
+---
+```
+
+## Podcasts (optional)
 Location of the file: `/opt/disco/run/podcasts.toml`
 
 ### Podcasts schema documentation

@@ -35,8 +35,7 @@ class JsonSchemaMarkdownGenerator:
         Generate Markdown documentation from a JSONSchema.
 
         :param schema: The JSONSchema dictionary
-        Returns:
-            str: Generated Markdown documentation
+        :return: Generated Markdown documentation
         """
         sections: list[str] = []
         if schema.get("description"):

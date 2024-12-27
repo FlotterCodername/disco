@@ -18,7 +18,7 @@ from disco.helpers.sorting import deep_sort
 from disco.paths import RES_SCHEMAS
 from disco.schemas.docgen import JsonSchemaMarkdownGenerator
 
-__all__ = ["podcasts", "secrets"]
+__all__ = ["bot", "podcasts", "secrets"]
 
 _BASE_URI = "https://raw.githubusercontent.com/FlotterCodername/disco/refs/heads/main/res/schemas"
 _DOC_GENERATOR = JsonSchemaMarkdownGenerator(indent_size=2)
@@ -68,6 +68,42 @@ class _DcSchema:
         """
         return RES_SCHEMAS / f"{self.name}.v{self.version}.{suffix}"
 
+
+bot = _DcSchema(
+    "bot",
+    1,
+    {
+        "additionalProperties": false,
+        "description": "This configuration stores everything related to the bot itself.",
+        "properties": {
+            "$schema": {"description": "Which JSONSchema the file follows.", "format": "uri", "type": "string"},
+            "no-reply": {
+                "additionalProperties": false,
+                "description": "Configuration for the 'no-reply' feature.",
+                "properties": {
+                    "enabled": {"description": "Whether the 'no-reply' feature is enabled.", "type": "boolean"},
+                    "message": {
+                        "description": (
+                            "The message to send back when the bot receives a message. If empty or not set, a "
+                            "default message in English will be sent."
+                        ),
+                        "type": "string",
+                    },
+                },
+                "required": ["enabled"],
+                "type": "object",
+            },
+        },
+        "title": "Bot",
+        "type": "object",
+    },
+    {
+        "no-reply": {
+            "enabled": true,
+            "message": "⚠️ I am a bot. My inbox is not monitored.",
+        }
+    },
+)
 
 podcasts = _DcSchema(
     "podcasts",
@@ -181,11 +217,11 @@ def _dump() -> int:
             target.write_text(new_text)
         # TOML example
         target = schema.get_path("example.toml")
-        old_text = target.read_text() if target.is_file() else ""
+        old_text = target.read_text("utf-8") if target.is_file() else ""
         new_text = tomli_w.dumps(schema.example, multiline_strings=True)
         if old_text != new_text:
             changed = 1
-            target.write_text(new_text)
+            target.write_text(new_text, "utf-8")
         # Markdown
         target = schema.get_path("md")
         old_text = target.read_text("utf-8") if target.is_file() else ""
