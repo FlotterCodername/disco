@@ -39,11 +39,11 @@ async def synchronize_podcasts() -> None:
     logger.info("Synchronizing podcasts...")
 
     def sync_get_podcasts() -> list[Podcast]:
-        _podcasts: list[Podcast] = Podcast.objects.all()
-        for _podcast in _podcasts:
+        podcasts_: list[Podcast] = Podcast.objects.all()
+        for _podcast in podcasts_:
             logger.info(f"Syncing podcast: {_podcast.name}")
             _podcast.update()
-        return _podcasts
+        return podcasts_
 
     podcasts = await asyncio.to_thread(sync_get_podcasts)
 

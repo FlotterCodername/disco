@@ -13,7 +13,7 @@ repos:
         language_version: python3.12
       - id: check-case-conflict
       - id: check-docstring-first
-      # - id: check-illegal-windows-names  # Not released yet
+      - id: check-illegal-windows-names
       - id: check-json
       - id: check-merge-conflict
       - id: check-toml
