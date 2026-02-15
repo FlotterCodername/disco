@@ -14,8 +14,8 @@ import jsonschema
 import tomli_w
 
 from disco.helpers.atomicwrites import atomic_write
-from disco.paths import PODCASTS_TOML, SECRETS_TOML
-from disco.schemas import podcasts, secrets
+from disco.paths import BOT_TOML, PODCASTS_TOML, SECRETS_TOML
+from disco.schemas import bot, podcasts, secrets
 
 if TYPE_CHECKING:
     # noinspection PyProtectedMember
@@ -49,6 +49,7 @@ class _DcConfiguration:
 class Configuration:
     """All configurations for the application."""
 
+    bot = _DcConfiguration(BOT_TOML, bot)
     podcasts = _DcConfiguration(PODCASTS_TOML, podcasts)
     secrets = _DcConfiguration(SECRETS_TOML, secrets)
 

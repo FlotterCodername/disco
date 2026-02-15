@@ -18,6 +18,7 @@ if os.getenv(EV.DISCO_IS_DOCKER):
 
 DISCO_RUN = DISCO_HOME / "run"
 DISCO_RUN.mkdir(parents=True, exist_ok=True)
+BOT_TOML = DISCO_RUN / "bot.toml"
 PODCASTS_TOML = DISCO_RUN / "podcasts.toml"
 SECRETS_TOML = DISCO_RUN / "secrets.toml"
 
