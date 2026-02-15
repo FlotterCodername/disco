@@ -20,29 +20,29 @@ disco = "disco.__main__:main"
 [tool.poetry.dependencies]
 python = ">=3.12 <4"
 # Dependencies
-attrs = "^24.3.0"  # https://www.attrs.org/en/stable/changelog.html
-discord-py = "^2.4.0"  # https://discordpy.readthedocs.io/en/stable/whats_new.html
-django = "^5.1.4"  # https://docs.djangoproject.com/en/5.1/releases/
-feedparser = "^6.0.11"  # https://github.com/kurtmckee/feedparser/blob/develop/CHANGELOG.rst
-jsonschema = "^4.23.0"  # https://github.com/python-jsonschema/jsonschema/releases
-packaging = "^24.2"  # https://packaging.pypa.io/en/stable/changelog.html
+attrs = "^25.4.0"  # https://www.attrs.org/en/stable/changelog.html
+discord-py = "^2.6.4"  # https://discordpy.readthedocs.io/en/stable/whats_new.html
+django = "^6.0.2"  # https://docs.djangoproject.com/en/5.1/releases/
+feedparser = "^6.0.12"  # https://github.com/kurtmckee/feedparser/blob/develop/CHANGELOG.rst
+jsonschema = "^4.26.0"  # https://github.com/python-jsonschema/jsonschema/releases
+packaging = "^26.0"  # https://packaging.pypa.io/en/stable/changelog.html
 python-dateutil = "^2.9.0.post0"  # https://github.com/dateutil/dateutil/releases
 python-decouple = "^3.8"  # https://github.com/HBNetwork/python-decouple/blob/master/CHANGELOG.md
-tomli-w = "^1.1.0"  # https://github.com/hukkin/tomli-w/blob/master/CHANGELOG.md
-yt-dlp = "^2024.12.23"  # https://github.com/yt-dlp/yt-dlp/blob/master/Changelog.md
+tomli-w = "^1.2.0"  # https://github.com/hukkin/tomli-w/blob/master/CHANGELOG.md
+yt-dlp = "^2026.2.4"  # https://github.com/yt-dlp/yt-dlp/blob/master/Changelog.md
 
 [tool.poetry.group.dev.dependencies]
-docsig = "^0.66.0"  # https://docsig.readthedocs.io/en/latest/development/changelog.html
-mypy = "^1.14.0"  # https://github.com/python/mypy/blob/master/CHANGELOG.md
-pytest = "^8.3.4"  # https://docs.pytest.org/en/stable/changelog.html
+docsig = "^0.78.0"  # https://docsig.readthedocs.io/en/latest/development/changelog.html
+mypy = "^1.19.1"  # https://github.com/python/mypy/blob/master/CHANGELOG.md
+pytest = "^9.0.2"  # https://docs.pytest.org/en/stable/changelog.html
 myst-parser = "^4.0.0"  # https://myst-parser.readthedocs.io/en/latest/develop/_changelog.html
 sphinx = "^7.4.7"  # https://www.sphinx-doc.org/en/master/changes/index.html
-sphinx-book-theme = "^1.1.3"  # https://github.com/executablebooks/sphinx-book-theme/blob/master/CHANGELOG.md
-types-colorama = "^0.4.15.20240311"
-types-jsonschema = "^4.23.0.20241208"
-types-python-dateutil = "^2.9.0.20241206"
-types-requests = "^2.32.0.20241016"
-types-xmltodict = "^0.14.0.20241009"
+sphinx-book-theme = "^1.1.4"  # https://github.com/executablebooks/sphinx-book-theme/blob/master/CHANGELOG.md
+types-colorama = "^0.4.15.20250801"
+types-jsonschema = "^4.26.0.20260202"
+types-python-dateutil = "^2.9.0.20260124"
+types-requests = "^2.32.4.20260107"
+types-xmltodict = "^1.0.1.20260113"
 
 [tool.black]
 line-length = 120
@@ -93,7 +93,7 @@ select = [
     "TCH",   # flake8-type-checking
     "FURB",  # refurb
 ]
-ignore = ["RET503", "RUF012"]
+ignore = ["RET503", "RUF012", "RUF067"]
 
 [build-system]
 requires = ["poetry-core"]

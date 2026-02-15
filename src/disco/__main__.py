@@ -40,9 +40,9 @@ async def synchronize_podcasts() -> None:
 
     def sync_get_podcasts() -> list[Podcast]:
         podcasts_: list[Podcast] = Podcast.objects.all()
-        for _podcast in podcasts_:
-            logger.info(f"Syncing podcast: {_podcast.name}")
-            _podcast.update()
+        for podcast_ in podcasts_:
+            logger.info(f"Syncing podcast: {podcast_.name}")
+            podcast_.update()
         return podcasts_
 
     podcasts = await asyncio.to_thread(sync_get_podcasts)
@@ -54,8 +54,8 @@ async def synchronize_podcasts() -> None:
         episodes: list[Episode] = await asyncio.to_thread(sync_get_episodes, podcast)
         channel = None
         guild = None
-        for _guild in bot.guilds:
-            guild = _guild if _guild.name == podcast.forward_guild else guild
+        for guild_ in bot.guilds:
+            guild = guild_ if guild_.name == podcast.forward_guild else guild
             if guild:
                 channel = get(guild.channels, name=podcast.forward_channel)
                 break
