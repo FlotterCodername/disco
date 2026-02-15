@@ -111,12 +111,12 @@ async def on_message(message) -> None:
     :param message: The message that was sent to the bot by a user
     """
     # Check if the message is a DM and that it is not from the bot itself
-    if message.guild is None and message.author != bot.user:
+    feature_config = Configuration.bot.content.get("no-reply", {})
+    no_reply_enabled = feature_config.get("enabled", False)
+    no_reply_message = feature_config.get("message", "This inbox is not monitored.")
+    if no_reply_enabled and message.guild is None and message.author != bot.user:
         # Send an automatic reply
-        await message.channel.send(
-            "Ich bin ein Bot. Meine Inbox wird daher nicht überwacht. Mehr Antworten bekommst du von mir nicht."
-        )
-
+        await message.channel.send(no_reply_message)
     await bot.process_commands(message)
 
 

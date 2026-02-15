@@ -81,13 +81,16 @@ bot = _DcSchema(
             "$schema": {"description": "Which JSONSchema the file follows.", "format": "uri", "type": "string"},
             "no-reply": {
                 "additionalProperties": false,
-                "description": "Configuration for the 'no-reply' feature.",
+                "description": (
+                    "Configuration for the 'no-reply' feature. If this is not set, the bot will not send any automatic"
+                    " replies."
+                ),
                 "properties": {
                     "enabled": {"description": "Whether the 'no-reply' feature is enabled.", "type": "boolean"},
                     "message": {
                         "description": (
-                            "The message to send back when the bot receives a message. If empty or not set, a "
-                            "default message in English will be sent."
+                            "The message to send back when the bot receives a message. If empty or not set, a default"
+                            " message in English will be sent."
                         ),
                         "type": "string",
                     },

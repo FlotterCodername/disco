@@ -11,7 +11,7 @@
     },
     "no-reply": {
       "additionalProperties": false,
-      "description": "Configuration for the 'no-reply' feature.",
+      "description": "Configuration for the 'no-reply' feature. If this is not set, the bot will not send any automatic replies.",
       "properties": {
         "enabled": {
           "description": "Whether the 'no-reply' feature is enabled.",

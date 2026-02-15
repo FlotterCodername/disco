@@ -4,7 +4,7 @@ This configuration stores everything related to the bot itself.
 | Property | Type | Required | Description |
 |----------|:----:|:--------:|-------------|
 | $schema | string (uri) |  | Which JSONSchema the file follows. |
-| no-reply | object |  | Configuration for the 'no-reply' feature. |
+| no-reply | object |  | Configuration for the 'no-reply' feature. If this is not set, the bot will not send any automatic replies. |
 
 #### `no-reply` (Optional)
 
