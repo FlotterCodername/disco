@@ -5,7 +5,7 @@
 # You can obtain one at https://mozilla.org/MPL/2.0/.
 
 # Use the official Python image from the Docker Hub
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 # Set the working directory in the container
 WORKDIR /app
