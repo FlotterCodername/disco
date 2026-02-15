@@ -1,3 +1,29 @@
+[project]
+name = "disco"
+version = "0.1.0.dev"
+description = ""
+requires-python = ">=3.14, <4"
+license = "LicenseRef-Proprietary"
+authors = [
+    { name = "Fabian H. Schneider", email = "discord-automation.primarily965@simplelogin.com" },
+]
+dynamic = [
+    "dependencies",
+    "optional-dependencies",
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown; charset=UTF-8; variant=GFM"
+
+[project.urls]
+documentation = "https://disco-automate.readthedocs.io/"
+source = "https://github.com/FlotterCodername/disco"
+issues = "https://github.com/FlotterCodername/disco/issues"
+
+[project.scripts]
+disco = "disco.__main__:main"
+
 [tool.definitions]
 name-pretty = "Disco"
 sphinx-extensions = ["myst_parser", "sphinx.ext.autodoc"]
@@ -5,20 +31,11 @@ sphinx-html-theme = "sphinx_book_theme"
 myst-enable-extensions = ["colon_fence"]
 
 [tool.poetry]
-name = "disco"
-version = "0.1.0.dev"
-description = ""
-authors = ["Fabian H. Schneider <discord-automation.primarily965@simplelogin.com>"]
-readme = "README.md"
-documentation = "https://disco-automate.readthedocs.io/"
+requires-poetry = ">=2.3.2"
 packages = [{ include = "disco", from = "src" }, ]
 include = ["res/*"]
 
-[tool.poetry.scripts]
-disco = "disco.__main__:main"
-
 [tool.poetry.dependencies]
-python = ">=3.12 <4"
 # Dependencies
 attrs = "^25.4.0"  # https://www.attrs.org/en/stable/changelog.html
 discord-py = "^2.6.4"  # https://discordpy.readthedocs.io/en/stable/whats_new.html
@@ -60,7 +77,7 @@ line_length = 120
 profile = "black"
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.14"
 ignore_errors = false
 # ignore_missing_imports = true
 
@@ -70,13 +87,13 @@ ignore_errors = true
 
 [tool.refurb]
 enable_all = true
-python_version = "3.12"
+python_version = "3.14"
 quiet = true
 
 [tool.ruff]
 line-length = 120
 preview = true
-target-version = "py312"
+target-version = "py314"
 
 [tool.ruff.lint]
 select = [

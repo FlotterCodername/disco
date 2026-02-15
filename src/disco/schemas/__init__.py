@@ -7,16 +7,18 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 """
 
 import json
-import pathlib
 import sys
 from dataclasses import dataclass
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 import tomli_w
 
 from disco.helpers.sorting import deep_sort
 from disco.paths import RES_SCHEMAS
 from disco.schemas.docgen import JsonSchemaMarkdownGenerator
+
+if TYPE_CHECKING:
+    import pathlib
 
 __all__ = ["podcasts", "secrets"]
 

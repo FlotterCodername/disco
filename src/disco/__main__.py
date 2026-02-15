@@ -68,7 +68,7 @@ async def synchronize_podcasts() -> None:
             await _publish_episodes(podcast, episodes, channel)
 
 
-async def _publish_episodes(podcast: Podcast, episodes: list[Episode], channel: "GuildChannel") -> None:
+async def _publish_episodes(podcast: Podcast, episodes: list[Episode], channel: GuildChannel) -> None:
     """
     McCabe complexity reduction for the `synchronize_podcasts` task.
 
