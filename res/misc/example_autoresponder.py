@@ -35,7 +35,7 @@ async def on_message(message: discord.Message) -> None:
     """
     Respond to messages that contain 'mindset' or 'resilienz'.
 
-    :param message: the message to (potentially) respond to
+    :param message: The message to (potentially) respond to
     """
     print(message, type(message))
     if message.author == client.user:

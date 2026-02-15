@@ -9,9 +9,11 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 import contextlib
 import os
 import tempfile
-from collections.abc import Generator
 from pathlib import Path
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 OpenTextMode = Literal[
     "r+",

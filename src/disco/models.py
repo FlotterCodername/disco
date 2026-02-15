@@ -9,16 +9,19 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 import hashlib
 from contextlib import suppress
 from datetime import UTC, datetime
+from typing import TYPE_CHECKING
 
 import dateutil.parser
 import feedparser
 from dateutil.parser import parse
 from django.db import models
-from django.db.models import Manager
 from feedparser import FeedParserDict
 
 from disco.configuration import Configuration
 from disco.helpers import logger
+
+if TYPE_CHECKING:
+    from django.db.models import Manager
 
 CHAR_FIELD_MAX_LENGTH = 10 ^ 9  # Not enforced by SQLite
 
@@ -122,7 +125,7 @@ class Episode(models.Model):
         return generate_hash(url_episode, date_published)
 
     @classmethod
-    def load_all(cls, podcast: Podcast, from_feed: FeedParserDict | None) -> list["Episode"]:
+    def load_all(cls, podcast: Podcast, from_feed: FeedParserDict | None) -> list[Episode]:
         """
         Load all episodes for a podcast.
 

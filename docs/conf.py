@@ -15,11 +15,10 @@ import re
 import tomllib
 
 __pyproject = tomllib.load((pathlib.Path(__file__).parent.parent / "pyproject.toml").resolve().open("rb"))
+__project = __pyproject.get("project", {})
 __definitions = __pyproject.get("tool", {}).get("definitions", {})
-__poetry = __pyproject.get("tool", {}).get("poetry", {})
-__author_re = re.compile(r"(.+?) (<(.*?)>)")
-__authors = [__author_re.match(i).group(1).strip() for i in __poetry.get("authors", [])]
-__author_str = f"{', '.join(__authors[:-1])} and {__authors[-1]}".removeprefix(" and ")
+__authors = [a.get("name", "").strip() for a in __project.get("authors", []) if a.get("name")]
+__author_str = f"{', '.join(__authors[:-1])} and {__authors[-1]}".removeprefix(" and ") if __authors else ""
 
 # Configuration file for the Sphinx documentation builder.
 #
@@ -29,11 +28,11 @@ __author_str = f"{', '.join(__authors[:-1])} and {__authors[-1]}".removeprefix("
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = __definitions.get("name-pretty")
+project = __definitions.get("name-pretty") or __project.get("name", "")
 # noinspection PyShadowingBuiltins
-copyright = f"{datetime.datetime.now().year}, {__author_str}"
+copyright = f"{datetime.datetime.now().year}, {__author_str}".removesuffix(", ")
 author = __author_str
-release = __poetry.get("version", "")
+release = __project.get("version", "")
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -77,7 +76,7 @@ def clear_copyright_docstring(app, what, name, obj, options, lines) -> None:
 
 def setup(app) -> None:
     """
-    Setup the Sphinx application object
+    Set up the Sphinx application object
 
     :param app: The Sphinx application object
     """

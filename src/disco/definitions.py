@@ -19,7 +19,7 @@ class _Ev:
         A simple getter that returns the attribute name regardless of whether it exists or not. Useful for getting
         defined attribute-like strings from the class.
 
-        :param item: cf. official Python documentation
+        :param item: Cf. Official Python documentation
         :return: Name of the attribute
         """
         return item
