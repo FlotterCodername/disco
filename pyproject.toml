@@ -3,7 +3,7 @@ name = "disco"
 version = "0.1.0.dev"
 description = ""
 requires-python = ">=3.14, <4"
-license = "LicenseRef-Proprietary"
+license = "MPL-2.0"
 authors = [
     { name = "Fabian H. Schneider", email = "discord-automation.primarily965@simplelogin.com" },
 ]
