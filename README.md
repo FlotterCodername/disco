@@ -10,7 +10,8 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 <!--[![☝️🧐 pre-commit](https://github.com/FlotterCodername/disco/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/FlotterCodername/disco/actions/workflows/pre-commit.yml)-->
 
-Discord automation stuff
+Discord automation stuff. **This project is now archived due to privacy and surveillance concerns that arose before
+Discord's planned IPO.**
 
 ## How to get started?
 
