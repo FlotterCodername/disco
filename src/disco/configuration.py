@@ -8,7 +8,6 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import tomllib
 from dataclasses import dataclass
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 import jsonschema
@@ -20,6 +19,8 @@ from disco.schemas import podcasts, secrets
 
 if TYPE_CHECKING:
     # noinspection PyProtectedMember
+    from pathlib import Path
+
     from disco.schemas import _DcSchema
 
 
@@ -28,7 +29,7 @@ class _DcConfiguration:
     """One of the configurations for the application."""
 
     path: Path  #: The path to the configuration file.
-    schema: "_DcSchema"  # The JSON schema for the configuration file.
+    schema: _DcSchema  # The JSON schema for the configuration file.
 
     @property
     def exists(self) -> bool:
